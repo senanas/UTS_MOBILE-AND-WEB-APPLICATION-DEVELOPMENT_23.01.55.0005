@@ -113,8 +113,8 @@ class ReminderScreen extends StatelessWidget {
                         ),
                         trailing: StatusBadge(
                           label: AppDateUtils.relativeLabel(s.nextServiceDate!),
-                          color: const Color(0xFFFAEEDA),
-                          textColor: const Color(0xFF854F0B),
+                          color: AppColors.tintAmber,
+                          textColor: AppColors.onTintAmber,
                         ),
                         onTap: () {
                           Navigator.push(

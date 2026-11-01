@@ -204,7 +204,7 @@ User isi form → _submit()
 | Artifacts desain (Figma) | Sebagian | Wireframe Minggu 4 sudah ada (skor 83). Perlu perbaikan: empty state, menu web, prototipe klik |
 | Demo prototipe (>= 3 halaman terhubung) | Ya — di Figma | Minimal 3 halaman Must terhubung: Login → Dashboard → Data Jam. Di kode Flutter sudah 11 halaman terhubung |
 | Rencana tech stack | Ya | Flutter + Dart, Provider untuk state, Repository pattern, target: Chrome (web). Rencana migrasi: Firebase untuk backend |
-| Repository GitHub + README | Ya | https://github.com/shafahelga/jam_tangan dengan README lengkap (identitas, deskripsi, Figma link, cara menjalankan) |
+| Repository GitHub + README | Ya | https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005 dengan README lengkap (identitas, deskripsi, Figma link, cara menjalankan) |
 
 ### Checklist persiapan UTS:
 

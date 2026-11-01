@@ -5,7 +5,7 @@
 **NIM:** 23.01.55.0005  
 **Kelas:** A1  
 **Nama project Flutter:** jam_tangan  
-**Tautan repository GitHub:** https://github.com/shafahelga/jam_tangan  
+**Tautan repository GitHub:** https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005  
 
 ---
 
@@ -36,7 +36,7 @@
 | VS Code + ekstensi Flutter | VS Code dengan ekstensi Flutter & Dart terpasang | Ya |
 | Chrome terdeteksi | Terverifikasi via flutter doctor [√] Chrome | Ya |
 | Git | git version 2.55.0.windows.3 | Ya |
-| Akun GitHub (username) | shafahelga | Ya |
+| Akun GitHub (username) | senanas | Ya |
 
 ---
 
@@ -65,7 +65,7 @@
 
 | Butir | Isian |
 |-------|-------|
-| Tautan repository | https://github.com/shafahelga/jam_tangan |
+| Tautan repository | https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005 |
 | Pesan commit pertama | "Inisialisasi project Flutter ChronoStore" |
 | Folder/file yang tampil di GitHub | lib/ (main.dart, app/, models/, providers/, repositories/, screens/, widgets/, services/, utils/), test/, pubspec.yaml, README.md, web/, android/, ios/, .gitignore |
 

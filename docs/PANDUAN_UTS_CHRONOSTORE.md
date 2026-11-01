@@ -125,14 +125,19 @@
 
 ### Bagian 6 — Rencana Teknis & Penutup (1,5 menit)
 
+> **Bagian ini sudah selesai — tidak perlu direkam manual.**
+> Video jadi: `uts-video/out/chronostore-uts-plan.mp4` (2:46, 5 scene).
+> Naskahnya ada di `docs/NARASI_VIDEO_UTS.md` bagian Lampiran.
+> Kalau ingin menyampaikan sendiri, pakai script di bawah.
+
 **Script:**
 > "Tech stack yang saya pakai: Flutter dan Dart untuk frontend, Provider untuk state management. Saat ini data disimpan di memori (mock data). Rencana untuk Pertemuan 9-15: migrasi ke Firebase — Firestore untuk database, Firebase Auth untuk autentikasi, dan Firebase Hosting untuk deployment.
 >
 > Rancangan database Firestore memiliki 4 collection: users (uid, name, email, role), watches (name, brand, model, movementType, price, stock, serialNumber, warrantyStart, warrantyEnd), service_records (watchId, serviceDate, serviceType, cost), dan transactions (watchId, quantity, unitPrice, totalPrice, userId, status).
 >
-> Kendala yang saya alami: Android SDK belum terpasang sehingga belum bisa test di emulator mobile, dan skor Figma 83/100 dengan catatan perlu menambah empty state dan menyamakan menu web. Empty state sudah saya implementasi di kode Flutter.
+> Kendala yang saya alami: Android SDK belum terpasang sehingga belum bisa test di emulator mobile, dan skor Figma 83/100 dengan catatan perlu menambah empty state dan menyamakan menu web. Empty state sudah saya implementasi di kode Flutter, dan tema aplikasi sudah diselaraskan dengan rancangan Figma.
 >
-> Yang belum selesai: integrasi Firebase, test coverage tambahan, dan screenshot untuk README. Rencana: selesaikan integrasi Firebase di Pertemuan 9-15 menuju UAS."
+> Rencana saya: selesaikan integrasi Firebase di Pertemuan 9-15 menuju UAS."
 
 **Jawab pertanyaan penguji #4:** "Bagaimana data akan disimpan?" — jawab di sini (mock data saat ini, Firestore rencana).
 
@@ -165,7 +170,9 @@
 > Form kosong: `_formKey.currentState!.validate()` mengembalikan false, submit dihentikan, setiap field wajib menampilkan pesan error di bawahnya ("Nama wajib diisi", "Email wajib diisi", dll). Data di luar batas: harga = 0 → "Harga harus lebih dari 0"; harga negatif → "Harga harus berupa angka" (jika bukan angka) atau "Harga harus lebih dari 0"; stok negatif → "Stok tidak boleh negatif"; nomor seri duplikat → "Nomor seri sudah digunakan". Tidak ada data yang masuk ke daftar jika validasi gagal.
 
 **7. Bagian mana yang belum selesai, dan apa rencana Anda menyelesaikannya sebelum UAS?**
-> Yang belum selesai: (1) Integrasi Firebase (Auth + Firestore) — direncanakan Pertemuan 9-15 dengan migrasi bertahap per repository. (2) Test coverage — saat ini 1 test, rencana tambah 9 test untuk validasi dan alur form. (3) Screenshot untuk README — akan diambil saat `flutter run -d chrome`. (4) Perbaikan Figma (empty state, menu web, prototipe) — empty state sudah di kode, tinggal samakan di Figma. (5) Push ke GitHub — akan dilakukan sebelum batas akhir UTS.
+> Yang belum selesai: (1) Integrasi Firebase (Auth + Firestore) — direncanakan Pertemuan 9-15 dengan migrasi bertahap per repository. (2) Test coverage — saat ini 1 test, rencana tambah 9 test untuk validasi dan alur form. (3) Perbaikan Figma (empty state, menu web, prototipe) — empty state dan tema gelap sudah diterapkan di kode, tinggal samakan di file Figma. (4) Video demo aplikasi berjalan — perlu direkam dengan `flutter run -d chrome`.
+>
+> Yang sudah selesai: screenshot README (login, dashboard, data jam tangan), push ke GitHub, tema aplikasi selaras Figma, dan dua video presentasi berbasis Remotion.
 
 ---
 
@@ -193,7 +200,7 @@ Berdasarkan UTS Brief Bagian 7:
 - [ ] **Push ke GitHub** — buat repo di github.com (jika belum), lalu:
   ```bash
   cd C:\dev\jam_tangan
-  git remote add origin https://github.com/shafahelga/jam_tangan.git
+  git remote add origin https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005.git
   git push -u origin main
   ```
 

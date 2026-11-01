@@ -81,24 +81,38 @@ export const Scene08Closing: React.FC<{ durationInFrames: number }> = ({
             style={{
               marginTop: 10,
               fontFamily: FONT_SANS,
-              fontSize: 24,
-              letterSpacing: 2.2,
+              fontSize: 21,
+              letterSpacing: 1.2,
               color: COLORS.gold,
               ...fadeUp(frame, 46, 16, 26),
             }}
           >
-            github.com/shafahelga/jam_tangan
+            github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005
           </div>
 
           <div
             style={{
               marginTop: 26,
               fontFamily: FONT_SANS,
-              fontSize: 19,
-              letterSpacing: 4.4,
+              fontSize: 18,
+              letterSpacing: 3.8,
+              textTransform: "uppercase",
+              color: COLORS.muted,
+              ...fadeUp(frame, 58, 12, 24),
+            }}
+          >
+            Maheswari Shafa Helga · 23.01.55.0005 · Kelas A1
+          </div>
+
+          <div
+            style={{
+              marginTop: 18,
+              fontFamily: FONT_SANS,
+              fontSize: 17,
+              letterSpacing: 5,
               textTransform: "uppercase",
               color: COLORS.dim,
-              ...fadeUp(frame, 58, 12, 24),
+              ...fadeUp(frame, 68, 12, 24),
             }}
           >
             Terima kasih

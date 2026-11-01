@@ -98,17 +98,22 @@ async def synthesize(text: str, voice: str, rate: str, pitch: str,
     raise RuntimeError(f"TTS failed after 3 attempts: {last_error}")
 
 
-async def main() -> int:
-    config = json.loads(SCRIPT_FILE.read_text(encoding="utf-8"))
+async def main(
+    script_file: Path = SCRIPT_FILE,
+    manifest_file: Path = MANIFEST_FILE,
+    audio_dir: Path = AUDIO_DIR,
+) -> int:
+    config = json.loads(script_file.read_text(encoding="utf-8"))
     voice = config["voice"]
     rate = config.get("rate", "+0%")
     pitch = config.get("pitch", "+0Hz")
     lead_in = float(config.get("leadInSeconds", 0.4))
     tail_out = float(config.get("tailOutSeconds", 0.55))
 
-    AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-    GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+    audio_dir.mkdir(parents=True, exist_ok=True)
+    manifest_file.parent.mkdir(parents=True, exist_ok=True)
 
+    print(f"script : {script_file.name}")
     print(f"voice  : {voice}")
     print(f"rate   : {rate}")
     print(f"scenes : {len(config['scenes'])}\n")
@@ -118,8 +123,8 @@ async def main() -> int:
 
     for index, scene in enumerate(config["scenes"], start=1):
         scene_id = scene["id"]
-        mp3_path = AUDIO_DIR / f"{scene_id}.mp3"
-        vtt_path = AUDIO_DIR / f"{scene_id}.vtt"
+        mp3_path = audio_dir / f"{scene_id}.mp3"
+        vtt_path = audio_dir / f"{scene_id}.vtt"
 
         print(f"[{index}/{len(config['scenes'])}] {scene_id} — {scene['label']}")
 
@@ -161,7 +166,7 @@ async def main() -> int:
         "scenes": manifest_scenes,
     }
 
-    MANIFEST_FILE.write_text(
+    manifest_file.write_text(
         json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
     )
 
@@ -169,10 +174,38 @@ async def main() -> int:
     seconds = total_seconds - minutes * 60
     print(
         f"\nDone. {manifest['totalFrames']} frames "
-        f"({minutes}:{seconds:05.2f}) -> {MANIFEST_FILE.relative_to(ROOT)}"
+        f"({minutes}:{seconds:05.2f}) -> {manifest_file}"
     )
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(asyncio.run(main()))
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Generate narration audio.")
+    parser.add_argument(
+        "--script",
+        default=str(SCRIPT_FILE),
+        help="path to the scene script JSON",
+    )
+    parser.add_argument(
+        "--manifest",
+        default=str(MANIFEST_FILE),
+        help="path to write the duration manifest",
+    )
+    parser.add_argument(
+        "--audio-dir",
+        default=str(AUDIO_DIR),
+        help="directory for generated mp3 files",
+    )
+    args = parser.parse_args()
+
+    sys.exit(
+        asyncio.run(
+            main(
+                Path(args.script),
+                Path(args.manifest),
+                Path(args.audio_dir),
+            )
+        )
+    )

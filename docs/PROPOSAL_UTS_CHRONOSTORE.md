@@ -10,8 +10,8 @@
 **NIM:** 23.01.55.0005  
 **Kelas:** A1  
 **Judul Aplikasi:** ChronoStore — Sistem Informasi Manajemen Toko Jam Tangan  
-**Repository GitHub:** https://github.com/shafahelga/jam_tangan  
-**Tautan Figma:** https://www.figma.com/design/shafa-chronostore-wireframe  
+**Repository GitHub:** https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005  
+**Tautan Figma:** https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4?node-id=0-1&t=Wm5CuiVQ7ukApOV4-1  
 
 ---
 
@@ -182,13 +182,13 @@ Login/Register → Dashboard (katalog singkat) → Data Jam Tangan (katalog leng
 
 ## 7. Wireframe / Figma
 
-**Tautan Figma:** https://www.figma.com/design/shafa-chronostore-wireframe
+**Tautan Figma:** https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4?node-id=0-1&t=Wm5CuiVQ7ukApOV4-1
 
 Wireframe dibuat di Minggu 4 untuk semua halaman Must (5 halaman mobile + 2 halaman web responsif). Wireframe mencakup:
 
 - **Mobile (5 halaman Must):** Login, Dashboard, Data Jam Tangan, Form Jam Tangan, Riwayat Servis
 - **Web responsif (minimal 2 halaman):** Dashboard (dengan NavigationRail), Data Jam Tangan
-- **Style guide:** Primer #C9A227 (emas), Teks #222222, Latar #F7F7F7, Status (berhasil #2E7D32, menunggu #ED8B00, galat #C62828)
+- **Style guide (diselaraskan ke Figma):** Latar `#151515`, kartu `#1B1B1B`, border `#4A4A4A`, aksen emas `#C9A227`, teks utama `#FFFFFF`, teks sekunder `#A0A0A0`, status (berhasil `#4CAF50`, menunggu `#ED8B00`, galat `#EF5350`). Rincian sampling warna: `docs/DESIGN_GUIDE_FIGMA.md`
 - **Tipografi:** Judul 24px, Subjudul 18px, Isi 16px, Caption 14px
 
 ### Kesesuaian wireframe dengan aplikasi:

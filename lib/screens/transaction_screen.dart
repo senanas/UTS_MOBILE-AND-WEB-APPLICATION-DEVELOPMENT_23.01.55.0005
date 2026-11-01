@@ -59,15 +59,15 @@ class TransactionScreen extends StatelessWidget {
                         StatusBadge(
                           label: tx.status.label,
                           color: tx.status == TransactionStatus.completed
-                              ? const Color(0xFFE1F5EE)
+                              ? AppColors.tintGreen
                               : tx.status == TransactionStatus.pending
-                                  ? const Color(0xFFFAEEDA)
-                                  : const Color(0xFFFCEBEB),
+                                  ? AppColors.tintAmber
+                                  : AppColors.tintRed,
                           textColor: tx.status == TransactionStatus.completed
-                              ? const Color(0xFF085041)
+                              ? AppColors.onTintGreen
                               : tx.status == TransactionStatus.pending
-                                  ? const Color(0xFF854F0B)
-                                  : const Color(0xFF791F1F),
+                                  ? AppColors.onTintAmber
+                                  : AppColors.onTintRed,
                         ),
                       ],
                     ),

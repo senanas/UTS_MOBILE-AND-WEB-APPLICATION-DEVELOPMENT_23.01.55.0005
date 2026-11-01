@@ -19,21 +19,24 @@ export const FONT_DISPLAY = `${playfair.fontFamily}, Georgia, "Times New Roman",
 export const FONT_SANS = `${inter.fontFamily}, "Segoe UI", system-ui, -apple-system, sans-serif`;
 
 export const COLORS = {
-  bg: "#12100C",
-  bgRaised: "#1B1813",
-  bgCard: "#211D16",
+  // Diselaraskan dengan design guideline Figma Minggu 4
+  // (lihat docs/DESIGN_GUIDE_FIGMA.md)
+  bg: "#151515",
+  bgRaised: "#1B1B1B",
+  bgCard: "#1F1F1F",
   gold: "#C9A227",
   goldBright: "#E8C55A",
   goldDim: "#7A6420",
-  cream: "#F5F1E8",
-  muted: "#A69E8D",
-  dim: "#6B6455",
-  hairline: "rgba(201, 162, 39, 0.22)",
-  hairlineSoft: "rgba(245, 241, 232, 0.10)",
-  error: "#C62828",
-  errorSoft: "rgba(198, 40, 40, 0.16)",
+  goldTint: "#2E2714",
+  cream: "#FFFFFF",
+  muted: "#A0A0A0",
+  dim: "#6E6E6E",
+  hairline: "rgba(201, 162, 39, 0.28)",
+  hairlineSoft: "rgba(255, 255, 255, 0.14)",
+  error: "#EF5350",
+  errorSoft: "rgba(239, 83, 80, 0.16)",
   warning: "#ED8B00",
-  success: "#2E7D32",
+  success: "#4CAF50",
 } as const;
 
 export const SIZES = {

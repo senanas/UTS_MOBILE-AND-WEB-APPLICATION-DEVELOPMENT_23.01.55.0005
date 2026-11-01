@@ -1,0 +1,6 @@
+{"type": "SentenceBoundary", "offset": 1000000, "duration": 44813829, "text": "Rencana Pertemuan sembilan sampai lima belas."}
+{"type": "SentenceBoundary", "offset": 45313829, "duration": 65425532, "text": "Sembilan dan sepuluh, menyiapkan Firebase dan memindahkan autentikasi."}
+{"type": "SentenceBoundary", "offset": 110739361, "duration": 84574468, "text": "Sebelas dan dua belas, memindahkan data jam tangan, servis, dan transaksi ke Firestore."}
+{"type": "SentenceBoundary", "offset": 195313830, "duration": 57712766, "text": "Tiga belas, menulis aturan keamanan dan mengoptimalkan query."}
+{"type": "SentenceBoundary", "offset": 253026596, "duration": 61968085, "text": "Empat belas, merapikan tampilan serta menangani keadaan memuat dan galat."}
+{"type": "SentenceBoundary", "offset": 314994681, "duration": 46409574, "text": "Lima belas, publikasi ke Firebase Hosting."}

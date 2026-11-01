@@ -1,0 +1,4 @@
+{"type": "SentenceBoundary", "offset": 1000000, "duration": 27127659, "text": "Alurnya berlapis."}
+{"type": "SentenceBoundary", "offset": 27627659, "duration": 88164893, "text": "Layar memanggil Provider, Provider memanggil Repository, dan Repository berbicara ke Firestore."}
+{"type": "SentenceBoundary", "offset": 115792553, "duration": 50664893, "text": "Saat ini Repository masih memakai data simulasi."}
+{"type": "SentenceBoundary", "offset": 166457447, "duration": 82736702, "text": "Pada fase berikutnya hanya lapisan Repository yang diganti, layar dan Provider tidak perlu diubah."}

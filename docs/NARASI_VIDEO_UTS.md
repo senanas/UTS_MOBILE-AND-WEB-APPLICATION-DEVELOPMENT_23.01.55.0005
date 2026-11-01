@@ -1,7 +1,8 @@
 # Narasi Video UTS — ChronoStore
 
-**Durasi total:** 3 menit 23 detik · **Suara:** id-ID-GadisNeural (edge-tts)
+**Video utama:** 3 menit 23 detik · 8 scene · **Suara:** id-ID-GadisNeural (edge-tts)
 **Tema video:** Masalah, Target Pengguna, dan Scope
+**Lampiran:** naskah video rencana teknis (2 menit 46 detik · 5 scene)
 
 Teks di bawah identik dengan yang dibacakan di video, jadi bisa dipakai untuk
 latihan atau untuk merekam ulang dengan suara sendiri.
@@ -89,20 +90,57 @@ Catatan kaki: *Fitur di luar cakupan UTS direncanakan pada Pertemuan 9–15 menu
 
 > Dari pencatatan manual, menuju satu sistem yang terpusat. ChronoStore. Repository dan detail lengkap tersedia di GitHub.
 
-**Di layar:** tagline, judul ChronoStore, `github.com/shafahelga/jam_tangan`, "Terima kasih".
+**Di layar:** tagline, judul ChronoStore, `github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005`, "Terima kasih".
 
 ---
 
 ## Catatan untuk UTS
 
-Video ini menjawab **Bagian 2 dan 3** dari Brief UTS (masalah & pengguna,
-kebutuhan & prioritas). Bagian 4–6 masih perlu direkam terpisah atau
-digabung: rancangan, demo aplikasi berjalan, dan rencana teknis.
+Video utama ini menjawab **Bagian 2 dan 3** dari Brief UTS (masalah & pengguna,
+kebutuhan & prioritas). Untuk **Bagian 6 (rencana teknis)** sudah tersedia
+video kedua: `uts-video/out/chronostore-uts-plan.mp4` (2:46) — naskahnya ada di
+lampiran bawah.
 
-Kalau ingin menjadikan ini satu video utuh 10 menit, sambungkan:
+Kalau ingin menyusun satu video utuh di bawah 10 menit, gabungkan berurutan:
 
-1. Video ini (3:23) — pembuka, masalah, target, scope
+1. `chronostore-uts.mp4` (3:23) — pembuka, masalah, target, scope
 2. Rekaman layar `flutter run -d chrome` (±3:30) — demo form & validasi
-3. Slide rencana teknis + Firestore (±1:30) — penutup
+3. `chronostore-uts-plan.mp4` (2:46) — arsitektur, Firestore, roadmap
 
-Total ±8:30, masih di bawah batas 10 menit.
+Total ±9:39, masih di bawah batas 10 menit.
+
+---
+
+# Lampiran — Narasi Video Rencana (`ChronoStoreUTSPlan`)
+
+**Durasi total:** 2 menit 46 detik · 5 scene.
+
+## Plan 1 — Tech Stack · 25 detik
+
+> Tech stack ChronoStore. Flutter dan Dart untuk antarmuka yang berjalan di mobile maupun web. Provider sebagai pengelola state. Untuk backend, Firebase paket Spark yang gratis: Authentication untuk login, Cloud Firestore untuk basis data, dan Hosting untuk publikasi.
+
+**Di layar:** dua kartu — "Aplikasi" (sudah berjalan) dan "Backend" (rencana Pertemuan 9–15).
+
+## Plan 2 — Rancangan Firestore · 48 detik
+
+> Rancangan basis data Firestore terdiri dari empat collection. Users menyimpan uid, nama, email, dan role. Watches menyimpan nama, merek, model, tipe mesin, harga, stok, nomor seri unik, dan masa garansi. Service records menyimpan watch id, tanggal servis, jenis servis, biaya, dan jadwal berikutnya. Transactions menyimpan watch id, jumlah, harga satuan, total, user id, dan status. Satu watch memiliki banyak service record dan banyak transaksi.
+
+**Di layar:** empat kartu collection sejajar + tiga chip relasi 1—N.
+
+## Plan 3 — Alur Data · 26 detik
+
+> Alurnya berlapis. Layar memanggil Provider, Provider memanggil Repository, dan Repository berbicara ke Firestore. Saat ini Repository masih memakai data simulasi. Pada fase berikutnya hanya lapisan Repository yang diganti, layar dan Provider tidak perlu diubah.
+
+**Di layar:** empat kotak berantai — Layar · Provider (TETAP) → Repository (DIGANTI) → Firestore (BARU), kotak yang berubah diberi latar emas.
+
+## Plan 4 — Rencana Pertemuan 9–15 · 37 detik
+
+> Rencana Pertemuan sembilan sampai lima belas. Sembilan dan sepuluh, menyiapkan Firebase dan memindahkan autentikasi. Sebelas dan dua belas, memindahkan data jam tangan, servis, dan transaksi ke Firestore. Tiga belas, menulis aturan keamanan dan mengoptimalkan query. Empat belas, merapikan tampilan serta menangani keadaan memuat dan galat. Lima belas, publikasi ke Firebase Hosting.
+
+**Di layar:** garis waktu vertikal 9–10 · 11–12 · 13 · 14 · 15.
+
+## Plan 5 — Kendala & Penutup · 31 detik
+
+> Kendala yang saya hadapi: Android SDK belum terpasang, sehingga pengujian dilakukan di Chrome. Nilai Figma Minggu empat delapan puluh tiga, dan sudah saya perbaiki dengan menambahkan keadaan kosong serta menyelaraskan tema aplikasi dengan rancangan. Pelajarannya, menetapkan aturan validasi sejak awal membuat implementasi jauh lebih cepat. Terima kasih.
+
+**Di layar:** kartu Kendala dan Pelajaran, lalu penutup "Terima kasih" + identitas.

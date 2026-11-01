@@ -7,6 +7,12 @@
 **Nama project Flutter:** jam_tangan  
 **Lokasi project:** C:\dev\jam_tangan  
 
+> **Catatan revisi:** isi worksheet ini mendokumentasikan kondisi kode pada
+> Minggu 6, ketika tema masih terang (`#F7F7F7` / teks `#222222`). Setelah
+> UTS, tema diselaraskan dengan wireframe Figma Minggu 4 menjadi tema gelap
+> (`#151515` / teks `#FFFFFF`). Nilai tema terbaru ada di `lib/app/theme.dart`
+> dan `docs/DESIGN_GUIDE_FIGMA.md`.
+
 ---
 
 ## Latihan 1 — Widget Tree dan StatelessWidget vs StatefulWidget

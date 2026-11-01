@@ -64,8 +64,8 @@ export const Scene05ProblemService: React.FC<{
               width: `${18 * missedZone}%`,
               height: 72,
               background:
-                "linear-gradient(90deg, rgba(198,40,40,0.20), rgba(198,40,40,0.04))",
-              borderLeft: "1px solid rgba(198,40,40,0.5)",
+                "linear-gradient(90deg, rgba(239,83,80,0.20), rgba(239,83,80,0.04))",
+              borderLeft: "1px solid rgba(239,83,80,0.5)",
             }}
           />
 
@@ -132,7 +132,7 @@ export const Scene05ProblemService: React.FC<{
                 fontSize: 19,
                 fontWeight: 700,
                 letterSpacing: 2.4,
-                color: "#E88A8A",
+                color: "#F08A88",
                 whiteSpace: "nowrap",
               }}
             >
@@ -143,7 +143,7 @@ export const Scene05ProblemService: React.FC<{
                 marginTop: 8,
                 width: 1,
                 height: 22,
-                backgroundColor: "rgba(198,40,40,0.7)",
+                backgroundColor: "rgba(239,83,80,0.7)",
               }}
             />
             <div

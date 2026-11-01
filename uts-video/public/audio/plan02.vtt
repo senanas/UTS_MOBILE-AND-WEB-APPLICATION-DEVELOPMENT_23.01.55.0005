@@ -1,0 +1,6 @@
+{"type": "SentenceBoundary", "offset": 1000000, "duration": 52925532, "text": "Rancangan basis data Firestore terdiri dari empat collection."}
+{"type": "SentenceBoundary", "offset": 53425532, "duration": 58776595, "text": "Users menyimpan uid, nama, email, dan role."}
+{"type": "SentenceBoundary", "offset": 112202127, "duration": 110239361, "text": "Watches menyimpan nama, merek, model, tipe mesin, harga, stok, nomor seri unik, dan masa garansi."}
+{"type": "SentenceBoundary", "offset": 222441489, "duration": 94281915, "text": "Service records menyimpan watch id, tanggal servis, jenis servis, biaya, dan jadwal berikutnya."}
+{"type": "SentenceBoundary", "offset": 316723405, "duration": 98670213, "text": "Transactions menyimpan watch id, jumlah, harga satuan, total, user id, dan status."}
+{"type": "SentenceBoundary", "offset": 415393618, "duration": 53191489, "text": "Satu watch memiliki banyak service record dan banyak transaksi."}

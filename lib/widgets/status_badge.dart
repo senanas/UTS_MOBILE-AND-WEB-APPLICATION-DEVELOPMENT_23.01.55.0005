@@ -20,17 +20,17 @@ class StatusBadge extends StatelessWidget {
     Color text;
     switch (status) {
       case WarrantyStatus.active:
-        bg = const Color(0xFFE1F5EE);
-        text = const Color(0xFF085041);
+        bg = AppColors.tintGreen;
+        text = AppColors.onTintGreen;
       case WarrantyStatus.expiringSoon:
-        bg = const Color(0xFFFAEEDA);
-        text = const Color(0xFF854F0B);
+        bg = AppColors.tintAmber;
+        text = AppColors.onTintAmber;
       case WarrantyStatus.expired:
-        bg = const Color(0xFFFCEBEB);
-        text = const Color(0xFF791F1F);
+        bg = AppColors.tintRed;
+        text = AppColors.onTintRed;
       case WarrantyStatus.none:
-        bg = const Color(0xFFF1EFE8);
-        text = const Color(0xFF666666);
+        bg = AppColors.tintNeutral;
+        text = AppColors.textSecondary;
     }
     return StatusBadge(label: status.label, color: bg, textColor: text);
   }
@@ -39,20 +39,20 @@ class StatusBadge extends StatelessWidget {
     if (stock <= 0) {
       return const StatusBadge(
         label: 'Stok Habis',
-        color: Color(0xFFFCEBEB),
-        textColor: Color(0xFF791F1F),
+        color: AppColors.tintRed,
+        textColor: AppColors.onTintRed,
       );
     } else if (stock <= 3) {
       return const StatusBadge(
         label: 'Stok Menipis',
-        color: Color(0xFFFAEEDA),
-        textColor: Color(0xFF854F0B),
+        color: AppColors.tintAmber,
+        textColor: AppColors.onTintAmber,
       );
     }
     return const StatusBadge(
       label: 'Tersedia',
-      color: Color(0xFFE1F5EE),
-      textColor: Color(0xFF085041),
+      color: AppColors.tintGreen,
+      textColor: AppColors.onTintGreen,
     );
   }
 

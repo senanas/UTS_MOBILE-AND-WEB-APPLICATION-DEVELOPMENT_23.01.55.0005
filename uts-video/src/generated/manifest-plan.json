@@ -1,0 +1,66 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "voice": "id-ID-GadisNeural",
+  "rate": "-6%",
+  "totalSeconds": 166.173,
+  "totalFrames": 4985,
+  "scenes": [
+    {
+      "id": "plan01",
+      "key": "techStack",
+      "label": "Tech Stack",
+      "narration": "Tech stack ChronoStore. Flutter dan Dart untuk antarmuka yang berjalan di mobile maupun web. Provider sebagai pengelola state. Untuk backend, Firebase paket Spark yang gratis: Authentication untuk login, Cloud Firestore untuk basis data, dan Hosting untuk publikasi.",
+      "audio": "audio/plan01.mp3",
+      "audioSeconds": 23.627,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 24.577,
+      "durationInFrames": 737
+    },
+    {
+      "id": "plan02",
+      "key": "firestore",
+      "label": "Rancangan Firestore",
+      "narration": "Rancangan basis data Firestore terdiri dari empat collection. Users menyimpan uid, nama, email, dan role. Watches menyimpan nama, merek, model, tipe mesin, harga, stok, nomor seri unik, dan masa garansi. Service records menyimpan watch id, tanggal servis, jenis servis, biaya, dan jadwal berikutnya. Transactions menyimpan watch id, jumlah, harga satuan, total, user id, dan status. Satu watch memiliki banyak service record dan banyak transaksi.",
+      "audio": "audio/plan02.mp3",
+      "audioSeconds": 46.859,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 47.809,
+      "durationInFrames": 1434
+    },
+    {
+      "id": "plan03",
+      "key": "dataFlow",
+      "label": "Alur Data",
+      "narration": "Alurnya berlapis. Layar memanggil Provider, Provider memanggil Repository, dan Repository berbicara ke Firestore. Saat ini Repository masih memakai data simulasi. Pada fase berikutnya hanya lapisan Repository yang diganti, layar dan Provider tidak perlu diubah.",
+      "audio": "audio/plan03.mp3",
+      "audioSeconds": 24.919,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 25.869,
+      "durationInFrames": 776
+    },
+    {
+      "id": "plan04",
+      "key": "roadmap",
+      "label": "Rencana Pertemuan 9-15",
+      "narration": "Rencana Pertemuan sembilan sampai lima belas. Sembilan dan sepuluh, menyiapkan Firebase dan memindahkan autentikasi. Sebelas dan dua belas, memindahkan data jam tangan, servis, dan transaksi ke Firestore. Tiga belas, menulis aturan keamanan dan mengoptimalkan query. Empat belas, merapikan tampilan serta menangani keadaan memuat dan galat. Lima belas, publikasi ke Firebase Hosting.",
+      "audio": "audio/plan04.mp3",
+      "audioSeconds": 36.14,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 37.09,
+      "durationInFrames": 1113
+    },
+    {
+      "id": "plan05",
+      "key": "planClosing",
+      "label": "Kendala & Penutup",
+      "narration": "Kendala yang saya hadapi: Android SDK belum terpasang, sehingga pengujian dilakukan di Chrome. Nilai Figma Minggu empat delapan puluh tiga, dan sudah saya perbaiki dengan menambahkan keadaan kosong serta menyelaraskan tema aplikasi dengan rancangan. Pelajarannya, menetapkan aturan validasi sejak awal membuat implementasi jauh lebih cepat. Terima kasih.",
+      "audio": "audio/plan05.mp3",
+      "audioSeconds": 29.877,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 30.827,
+      "durationInFrames": 925
+    }
+  ]
+}

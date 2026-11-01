@@ -105,29 +105,25 @@ class DashboardScreen extends StatelessWidget {
                     icon: Icons.watch,
                     label: 'Total Jam',
                     value: '${watchProv.totalWatches}',
-                    color: const Color(0xFFE6F1FB),
-                    iconColor: const Color(0xFF185FA5),
+                    iconColor: AppColors.onTintBlue,
                   ),
                   _SummaryCard(
                     icon: Icons.inventory_2_outlined,
                     label: 'Total Stok',
                     value: '${watchProv.totalStock}',
-                    color: const Color(0xFFE1F5EE),
-                    iconColor: const Color(0xFF0F6E56),
+                    iconColor: AppColors.onTintGreen,
                   ),
                   _SummaryCard(
                     icon: Icons.shield_outlined,
                     label: 'Garansi Aktif',
                     value: '${watchProv.activeWarrantyCount}',
-                    color: const Color(0xFFFAEEDA),
-                    iconColor: const Color(0xFF854F0B),
+                    iconColor: AppColors.onTintAmber,
                   ),
                   _SummaryCard(
                     icon: Icons.warning_amber,
                     label: 'Stok Habis',
                     value: '${watchProv.outOfStockCount}',
-                    color: const Color(0xFFFCEBEB),
-                    iconColor: const Color(0xFF791F1F),
+                    iconColor: AppColors.onTintRed,
                   ),
                 ],
               ),
@@ -243,14 +239,12 @@ class _SummaryCard extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
-  final Color color;
   final Color iconColor;
 
   const _SummaryCard({
     required this.icon,
     required this.label,
     required this.value,
-    required this.color,
     required this.iconColor,
   });
 
@@ -259,8 +253,9 @@ class _SummaryCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(AppSizes.spacingMd),
       decoration: BoxDecoration(
-        color: color,
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radiusLg),
+        border: Border.all(color: AppColors.border),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

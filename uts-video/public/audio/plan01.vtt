@@ -1,0 +1,4 @@
+{"type": "SentenceBoundary", "offset": 1000000, "duration": 25132978, "text": "Tech stack ChronoStore."}
+{"type": "SentenceBoundary", "offset": 25632978, "duration": 53058510, "text": "Flutter dan Dart untuk antarmuka yang berjalan di mobile maupun web."}
+{"type": "SentenceBoundary", "offset": 78691489, "duration": 34465425, "text": "Provider sebagai pengelola state."}
+{"type": "SentenceBoundary", "offset": 113156915, "duration": 123114362, "text": "Untuk backend, Firebase paket Spark yang gratis: Authentication untuk login, Cloud Firestore untuk basis data, dan Hosting untuk publikasi."}

@@ -30,7 +30,7 @@ export const Backdrop: React.FC<BackdropProps> = ({
         <AbsoluteFill
           style={{
             opacity: 0.5,
-            backgroundImage: `linear-gradient(to right, rgba(245,241,232,0.035) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px)`,
             backgroundSize: "160px 100%",
             maskImage:
               "radial-gradient(1100px 700px at 50% 45%, black, transparent 78%)",

@@ -23,8 +23,8 @@ ChronoStore adalah sistem informasi yang membantu pemilik/admin toko jam tangan 
 
 ## Tautan
 
-- **Desain Figma (Wireframe Minggu 4):** https://www.figma.com/design/shafa-chronostore-wireframe
-- **Repository GitHub:** https://github.com/shafahelga/jam_tangan
+- **Desain Figma (Wireframe Minggu 4):** https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4?node-id=0-1&t=Wm5CuiVQ7ukApOV4-1
+- **Repository GitHub:** https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005
 - **Proposal UTS:** [docs/PROPOSAL_UTS_CHRONOSTORE.md](docs/PROPOSAL_UTS_CHRONOSTORE.md)
 
 ## Cara Menjalankan
@@ -95,7 +95,7 @@ jam_tangan/
 ├── lib/
 │   ├── main.dart                    # Entry point + MultiProvider
 │   ├── app/
-│   │   ├── theme.dart               # Tema (emas #C9A227, Material 3)
+│   │   ├── theme.dart               # Tema gelap (emas #C9A227, Material 3)
 │   │   └── constants.dart           # Konstanta & named routes
 │   ├── models/                      # Watch, UserAccount, ServiceRecord, Transaction
 │   ├── repositories/                # Repository pattern (mock_data → Firestore)
@@ -118,12 +118,14 @@ jam_tangan/
 ├── docs/
 │   ├── PROPOSAL_UTS_CHRONOSTORE.md  # Proposal UTS lengkap
 │   ├── PANDUAN_UTS_CHRONOSTORE.md   # Panduan video presentasi
-│   ├── NARASI_VIDEO_UTS.md          # Teks narasi video UTS
+│   ├── NARASI_VIDEO_UTS.md          # Teks narasi kedua video
+│   ├── DESIGN_GUIDE_FIGMA.md        # Token desain hasil sampling Figma
 │   ├── WORKSHEET_MINGGU_5_SHAFA.md
 │   ├── WORKSHEET_MINGGU_6_SHAFA.md
 │   ├── WORKSHEET_MINGGU_7_SHAFA.md
 │   ├── screenshot-login.png
-│   └── screenshot-dashboard.png
+│   ├── screenshot-dashboard.png
+│   └── screenshot-data-jam.png
 ├── uts-video/                       # Video UTS (Remotion + edge-tts)
 ├── test/
 │   └── widget_test.dart             # Test halaman login
@@ -140,24 +142,50 @@ jam_tangan/
 
 ![Screenshot Dashboard](docs/screenshot-dashboard.png)
 
+**Data Jam Tangan — katalog dengan pencarian dan filter**
+
+![Screenshot Data Jam](docs/screenshot-data-jam.png)
+
 ## Video UTS
 
-Video presentasi (masalah, target pengguna, dan scope) dibuat dengan
-Remotion + narasi edge-tts, durasi 3:23.
+Dua video dibuat sepenuhnya dengan kode — **Remotion** untuk visual,
+**edge-tts** untuk narasi (gratis, tanpa API key).
+
+| Video | Durasi | Isi |
+|-------|--------|-----|
+| `chronostore-uts.mp4` | 3:23 | Masalah, target pengguna, scope (MoSCoW) |
+| `chronostore-uts-plan.mp4` | 2:46 | Tech stack, Firestore, alur data, roadmap 9–15 |
 
 - Sumber & cara render: [`uts-video/README.md`](uts-video/README.md)
-- Teks narasi: [`docs/NARASI_VIDEO_UTS.md`](docs/NARASI_VIDEO_UTS.md)
+- Teks narasi lengkap: [`docs/NARASI_VIDEO_UTS.md`](docs/NARASI_VIDEO_UTS.md)
 
 ## Style Guide
 
-| Elemen | Warna |
-|--------|-------|
-| Primer (emas) | #C9A227 |
-| Teks utama | #222222 |
-| Latar | #F7F7F7 |
-| Status: berhasil | #2E7D32 |
-| Status: menunggu | #ED8B00 |
-| Status: galat | #C62828 |
+Seluruh warna disampel langsung dari wireframe Figma Minggu 4 — bukan dikira-kira.
+Detail proses dan nilai mentahnya ada di [`docs/DESIGN_GUIDE_FIGMA.md`](docs/DESIGN_GUIDE_FIGMA.md).
+
+**Warna**
+
+| Elemen | Warna | Kode |
+|--------|-------|------|
+| Latar layar | Hitam lembut | `#151515` |
+| Permukaan kartu | Abu gelap | `#1B1B1B` |
+| Kartu terangkat | Abu lebih terang | `#1F1F1F` |
+| Garis kartu | Abu netral | `#4A4A4A` |
+| Pembagi | Abu redup | `#2E2E2E` |
+| Aksen emas | Emas | `#C9A227` |
+| Teks utama | Putih | `#FFFFFF` |
+| Teks sekunder | Abu terang | `#A0A0A0` |
+| Teks petunjuk | Abu redup | `#6E6E6E` |
+| Status berhasil | Hijau | `#4CAF50` |
+| Status menunggu | Jingga | `#ED8B00` |
+| Status galat | Merah | `#EF5350` |
+
+> **Catatan:** nilai emas di file Figma adalah `#BF982C`, sedangkan kode memakai
+> `#C9A227` — nilai acuan yang sudah ditetapkan di worksheet Minggu 4. Selisihnya
+> kecil dan sengaja dipertahankan agar konsisten dengan dokumen tugas.
+
+**Tipografi & ukuran**
 
 | Elemen | Ukuran |
 |--------|--------|
@@ -167,6 +195,9 @@ Remotion + narasi edge-tts, durasi 3:23.
 | Caption | 14px |
 | Tinggi tombol | 48px |
 | Spacing | kelipatan 8px (4, 8, 16, 24, 32) |
+
+**Responsif:** lebar layar `>= 600px` memakai `NavigationRail`, di bawahnya
+`BottomNavigationBar`.
 
 ## Worksheet Minggu 1-7
 

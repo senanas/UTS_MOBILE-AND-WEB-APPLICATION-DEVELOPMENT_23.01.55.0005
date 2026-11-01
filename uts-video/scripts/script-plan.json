@@ -1,0 +1,39 @@
+{
+  "voice": "id-ID-GadisNeural",
+  "rate": "-6%",
+  "pitch": "+0Hz",
+  "leadInSeconds": 0.4,
+  "tailOutSeconds": 0.55,
+  "scenes": [
+    {
+      "id": "plan01",
+      "key": "techStack",
+      "label": "Tech Stack",
+      "text": "Tech stack ChronoStore. Flutter dan Dart untuk antarmuka yang berjalan di mobile maupun web. Provider sebagai pengelola state. Untuk backend, Firebase paket Spark yang gratis: Authentication untuk login, Cloud Firestore untuk basis data, dan Hosting untuk publikasi."
+    },
+    {
+      "id": "plan02",
+      "key": "firestore",
+      "label": "Rancangan Firestore",
+      "text": "Rancangan basis data Firestore terdiri dari empat collection. Users menyimpan uid, nama, email, dan role. Watches menyimpan nama, merek, model, tipe mesin, harga, stok, nomor seri unik, dan masa garansi. Service records menyimpan watch id, tanggal servis, jenis servis, biaya, dan jadwal berikutnya. Transactions menyimpan watch id, jumlah, harga satuan, total, user id, dan status. Satu watch memiliki banyak service record dan banyak transaksi."
+    },
+    {
+      "id": "plan03",
+      "key": "dataFlow",
+      "label": "Alur Data",
+      "text": "Alurnya berlapis. Layar memanggil Provider, Provider memanggil Repository, dan Repository berbicara ke Firestore. Saat ini Repository masih memakai data simulasi. Pada fase berikutnya hanya lapisan Repository yang diganti, layar dan Provider tidak perlu diubah."
+    },
+    {
+      "id": "plan04",
+      "key": "roadmap",
+      "label": "Rencana Pertemuan 9-15",
+      "text": "Rencana Pertemuan sembilan sampai lima belas. Sembilan dan sepuluh, menyiapkan Firebase dan memindahkan autentikasi. Sebelas dan dua belas, memindahkan data jam tangan, servis, dan transaksi ke Firestore. Tiga belas, menulis aturan keamanan dan mengoptimalkan query. Empat belas, merapikan tampilan serta menangani keadaan memuat dan galat. Lima belas, publikasi ke Firebase Hosting."
+    },
+    {
+      "id": "plan05",
+      "key": "planClosing",
+      "label": "Kendala & Penutup",
+      "text": "Kendala yang saya hadapi: Android SDK belum terpasang, sehingga pengujian dilakukan di Chrome. Nilai Figma Minggu empat delapan puluh tiga, dan sudah saya perbaiki dengan menambahkan keadaan kosong serta menyelaraskan tema aplikasi dengan rancangan. Pelajarannya, menetapkan aturan validasi sejak awal membuat implementasi jauh lebih cepat. Terima kasih."
+    }
+  ]
+}

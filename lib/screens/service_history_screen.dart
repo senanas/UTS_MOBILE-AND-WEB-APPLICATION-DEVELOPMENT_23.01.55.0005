@@ -130,7 +130,7 @@ class _ServiceHistoryScreenState extends State<ServiceHistoryScreen> {
                           subtitle: Text(AppDateUtils.formatDate(s.serviceDate)),
                           trailing: StatusBadge(
                             label: AppDateUtils.relativeLabel(s.serviceDate),
-                            color: const Color(0xFFF1EFE8),
+                            color: AppColors.tintNeutral,
                             textColor: AppColors.textSecondary,
                           ),
                           children: [

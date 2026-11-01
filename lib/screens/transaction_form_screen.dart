@@ -168,8 +168,9 @@ class _TransactionFormScreenState extends State<TransactionFormScreen> {
             Container(
               padding: const EdgeInsets.all(AppSizes.cardPadding),
               decoration: BoxDecoration(
-                color: const Color(0xFFFAEEDA),
+                color: AppColors.tintAmber,
                 borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                border: Border.all(color: AppColors.primaryDark),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,15 +179,15 @@ class _TransactionFormScreenState extends State<TransactionFormScreen> {
                     'Total Harga',
                     style: TextStyle(
                       fontSize: AppSizes.body,
-                      color: Color(0xFF854F0B),
+                      color: AppColors.onTintAmber,
                     ),
                   ),
                   Text(
                     AppDateUtils.formatCurrency(_totalPrice),
                     style: const TextStyle(
                       fontSize: AppSizes.title,
-                      fontWeight: FontWeight.w500,
-                      color: Color(0xFF854F0B),
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.onTintAmber,
                     ),
                   ),
                 ],

@@ -109,10 +109,10 @@ export const Scene03ProblemSerial: React.FC<{ durationInFrames: number }> = ({
             const delay = 30 + index * 7;
             const isFlagged = Boolean(row.duplicate);
             const borderColor = isFlagged
-              ? `rgba(198,40,40,${0.12 + 0.55 * highlight})`
+              ? `rgba(239,83,80,${0.12 + 0.55 * highlight})`
               : "transparent";
             const background = isFlagged
-              ? `rgba(198,40,40,${0.02 + 0.11 * highlight})`
+              ? `rgba(239,83,80,${0.02 + 0.11 * highlight})`
               : "transparent";
 
             return (
@@ -138,7 +138,7 @@ export const Scene03ProblemSerial: React.FC<{ durationInFrames: number }> = ({
                     fontVariantNumeric: "tabular-nums",
                     letterSpacing: 1.1,
                     color: isFlagged && highlight > 0.2
-                      ? "#E88A8A"
+                      ? "#F08A88"
                       : COLORS.cream,
                     width: 250,
                   }}
@@ -177,8 +177,8 @@ export const Scene03ProblemSerial: React.FC<{ durationInFrames: number }> = ({
                       fontSize: 15,
                       fontWeight: 700,
                       letterSpacing: 2,
-                      color: "#F2A0A0",
-                      border: "1px solid rgba(198,40,40,0.6)",
+                      color: "#F7A5A3",
+                      border: "1px solid rgba(239,83,80,0.6)",
                       borderRadius: 4,
                       padding: "5px 10px",
                       opacity: badge,
