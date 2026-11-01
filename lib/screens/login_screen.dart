@@ -70,17 +70,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // Logo / judul
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryLight,
-                        borderRadius: BorderRadius.circular(AppSizes.radiusXl),
-                      ),
-                      child: const Icon(
-                        Icons.watch,
-                        size: 40,
-                        color: AppColors.primary,
+                    Center(
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight,
+                          borderRadius: BorderRadius.circular(AppSizes.radiusXl),
+                        ),
+                        child: const Icon(
+                          Icons.watch,
+                          size: 40,
+                          color: AppColors.primary,
+                        ),
                       ),
                     ),
                     const SizedBox(height: AppSizes.spacingLg),

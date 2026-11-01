@@ -118,10 +118,13 @@ jam_tangan/
 ├── docs/
 │   ├── PROPOSAL_UTS_CHRONOSTORE.md  # Proposal UTS lengkap
 │   ├── PANDUAN_UTS_CHRONOSTORE.md   # Panduan video presentasi
+│   ├── NARASI_VIDEO_UTS.md          # Teks narasi video UTS
 │   ├── WORKSHEET_MINGGU_5_SHAFA.md
 │   ├── WORKSHEET_MINGGU_6_SHAFA.md
 │   ├── WORKSHEET_MINGGU_7_SHAFA.md
-│   └── screenshot-beranda.png       # (akan ditambahkan)
+│   ├── screenshot-login.png
+│   └── screenshot-dashboard.png
+├── uts-video/                       # Video UTS (Remotion + edge-tts)
 ├── test/
 │   └── widget_test.dart             # Test halaman login
 └── pubspec.yaml
@@ -129,9 +132,21 @@ jam_tangan/
 
 ## Screenshot
 
-![Screenshot Beranda](docs/screenshot-beranda.png)
+**Halaman Login**
 
-*(Screenshot akan ditambahkan setelah flutter run di Chrome)*
+![Screenshot Login](docs/screenshot-login.png)
+
+**Dashboard Admin — tampilan web (NavigationRail aktif pada lebar >= 600px)**
+
+![Screenshot Dashboard](docs/screenshot-dashboard.png)
+
+## Video UTS
+
+Video presentasi (masalah, target pengguna, dan scope) dibuat dengan
+Remotion + narasi edge-tts, durasi 3:23.
+
+- Sumber & cara render: [`uts-video/README.md`](uts-video/README.md)
+- Teks narasi: [`docs/NARASI_VIDEO_UTS.md`](docs/NARASI_VIDEO_UTS.md)
 
 ## Style Guide
 
