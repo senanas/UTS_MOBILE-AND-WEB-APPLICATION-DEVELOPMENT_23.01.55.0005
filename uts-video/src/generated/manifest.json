@@ -1,0 +1,99 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "voice": "id-ID-GadisNeural",
+  "rate": "-6%",
+  "totalSeconds": 203.013,
+  "totalFrames": 6090,
+  "scenes": [
+    {
+      "id": "scene01",
+      "key": "opening",
+      "label": "Pembuka",
+      "narration": "ChronoStore. Sistem informasi manajemen toko jam tangan. Proyek individu mata kuliah Mobile and Web Application Development. Saya Maheswari Shafa Helga, kelas A satu.",
+      "audio": "audio/scene01.mp3",
+      "audioSeconds": 17.311,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 18.261,
+      "durationInFrames": 548
+    },
+    {
+      "id": "scene02",
+      "key": "problemOverview",
+      "label": "Tiga Masalah",
+      "narration": "Toko jam tangan menghadapi tiga masalah utama dalam operasional sehari-hari. Ketiganya berakar pada satu hal yang sama: pencatatan yang masih manual dan tersebar di banyak tempat.",
+      "audio": "audio/scene02.mp3",
+      "audioSeconds": 14.425,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 15.375,
+      "durationInFrames": 461
+    },
+    {
+      "id": "scene03",
+      "key": "problemSerial",
+      "label": "Masalah 1 — Stok & Nomor Seri",
+      "narration": "Masalah pertama, pencatatan stok dan nomor seri yang masih manual. Setiap jam tangan memiliki nomor seri unik untuk keperluan garansi dan autentikasi. Tanpa sistem terpusat, nomor seri bisa tercatat ganda, jumlah stok tidak akurat, dan pencarian satu unit tertentu memakan waktu lama.",
+      "audio": "audio/scene03.mp3",
+      "audioSeconds": 24.372,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 25.322,
+      "durationInFrames": 760
+    },
+    {
+      "id": "scene04",
+      "key": "problemSpecs",
+      "label": "Masalah 2 — Spesifikasi",
+      "narration": "Masalah kedua, informasi tipe mesin tidak terorganisir. Mesin automatic, quartz, dan solar membutuhkan perawatan yang berbeda. Ketika data spesifikasi tersebar di buku dan catatan lepas, admin sulit menjawab pertanyaan pelanggan dan menentukan jadwal servis yang tepat.",
+      "audio": "audio/scene04.mp3",
+      "audioSeconds": 23.015,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 23.965,
+      "durationInFrames": 719
+    },
+    {
+      "id": "scene05",
+      "key": "problemService",
+      "label": "Masalah 3 — Servis & Garansi",
+      "narration": "Masalah ketiga, riwayat servis dan pengingat garansi yang tidak terkelola. Garansi memiliki masa berlaku, dan servis berkala harus dijadwalkan. Tanpa pengingat, masa garansi terlewat, pelanggan kehilangan hak servisnya, dan toko kehilangan potensi pendapatan.",
+      "audio": "audio/scene05.mp3",
+      "audioSeconds": 23.029,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 23.979,
+      "durationInFrames": 719
+    },
+    {
+      "id": "scene06",
+      "key": "targetUsers",
+      "label": "Target Pengguna",
+      "narration": "Pengguna utama ChronoStore adalah admin atau pemilik toko, seperti Andi, tiga puluh empat tahun, yang setiap hari mengelola puluhan jam tangan dengan nomor seri dan masa garansi yang berbeda-beda. Ia membutuhkan pencarian cepat dan pengingat otomatis. Pengguna sekunder adalah pelanggan, seperti Siti, yang ingin melihat katalog, membandingkan spesifikasi, dan memesan tanpa harus datang ke toko.",
+      "audio": "audio/scene06.mp3",
+      "audioSeconds": 31.991,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 32.941,
+      "durationInFrames": 988
+    },
+    {
+      "id": "scene07",
+      "key": "scope",
+      "label": "Scope — MoSCoW",
+      "narration": "Ruang lingkup ChronoStore disusun dengan metode MoSCoW. Prioritas Must atau wajib: autentikasi, kelola data jam tangan dengan validasi nomor seri unik, riwayat servis, dan katalog untuk pelanggan. Ini fitur inti yang membuat aplikasi berfungsi. Prioritas Should atau sebaiknya: dashboard ringkasan, pengingat garansi, dan transaksi. Nilainya tinggi, tetapi aplikasi tetap berjalan tanpanya. Di luar cakupan UTS: integrasi Firebase, pembayaran online, dan notifikasi WhatsApp. Ketiganya masuk rencana fase implementasi menuju UAS.",
+      "audio": "audio/scene07.mp3",
+      "audioSeconds": 49.305,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 50.255,
+      "durationInFrames": 1508
+    },
+    {
+      "id": "scene08",
+      "key": "closing",
+      "label": "Penutup",
+      "narration": "Dari pencatatan manual, menuju satu sistem yang terpusat. ChronoStore. Repository dan detail lengkap tersedia di GitHub.",
+      "audio": "audio/scene08.mp3",
+      "audioSeconds": 11.965,
+      "leadInSeconds": 0.4,
+      "durationInSeconds": 12.915,
+      "durationInFrames": 387
+    }
+  ]
+}

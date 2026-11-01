@@ -1,0 +1,57 @@
+{
+  "voice": "id-ID-GadisNeural",
+  "rate": "-6%",
+  "pitch": "+0Hz",
+  "leadInSeconds": 0.4,
+  "tailOutSeconds": 0.55,
+  "scenes": [
+    {
+      "id": "scene01",
+      "key": "opening",
+      "label": "Pembuka",
+      "text": "ChronoStore. Sistem informasi manajemen toko jam tangan. Proyek individu mata kuliah Mobile and Web Application Development. Saya Maheswari Shafa Helga, kelas A satu."
+    },
+    {
+      "id": "scene02",
+      "key": "problemOverview",
+      "label": "Tiga Masalah",
+      "text": "Toko jam tangan menghadapi tiga masalah utama dalam operasional sehari-hari. Ketiganya berakar pada satu hal yang sama: pencatatan yang masih manual dan tersebar di banyak tempat."
+    },
+    {
+      "id": "scene03",
+      "key": "problemSerial",
+      "label": "Masalah 1 — Stok & Nomor Seri",
+      "text": "Masalah pertama, pencatatan stok dan nomor seri yang masih manual. Setiap jam tangan memiliki nomor seri unik untuk keperluan garansi dan autentikasi. Tanpa sistem terpusat, nomor seri bisa tercatat ganda, jumlah stok tidak akurat, dan pencarian satu unit tertentu memakan waktu lama."
+    },
+    {
+      "id": "scene04",
+      "key": "problemSpecs",
+      "label": "Masalah 2 — Spesifikasi",
+      "text": "Masalah kedua, informasi tipe mesin tidak terorganisir. Mesin automatic, quartz, dan solar membutuhkan perawatan yang berbeda. Ketika data spesifikasi tersebar di buku dan catatan lepas, admin sulit menjawab pertanyaan pelanggan dan menentukan jadwal servis yang tepat."
+    },
+    {
+      "id": "scene05",
+      "key": "problemService",
+      "label": "Masalah 3 — Servis & Garansi",
+      "text": "Masalah ketiga, riwayat servis dan pengingat garansi yang tidak terkelola. Garansi memiliki masa berlaku, dan servis berkala harus dijadwalkan. Tanpa pengingat, masa garansi terlewat, pelanggan kehilangan hak servisnya, dan toko kehilangan potensi pendapatan."
+    },
+    {
+      "id": "scene06",
+      "key": "targetUsers",
+      "label": "Target Pengguna",
+      "text": "Pengguna utama ChronoStore adalah admin atau pemilik toko, seperti Andi, tiga puluh empat tahun, yang setiap hari mengelola puluhan jam tangan dengan nomor seri dan masa garansi yang berbeda-beda. Ia membutuhkan pencarian cepat dan pengingat otomatis. Pengguna sekunder adalah pelanggan, seperti Siti, yang ingin melihat katalog, membandingkan spesifikasi, dan memesan tanpa harus datang ke toko."
+    },
+    {
+      "id": "scene07",
+      "key": "scope",
+      "label": "Scope — MoSCoW",
+      "text": "Ruang lingkup ChronoStore disusun dengan metode MoSCoW. Prioritas Must atau wajib: autentikasi, kelola data jam tangan dengan validasi nomor seri unik, riwayat servis, dan katalog untuk pelanggan. Ini fitur inti yang membuat aplikasi berfungsi. Prioritas Should atau sebaiknya: dashboard ringkasan, pengingat garansi, dan transaksi. Nilainya tinggi, tetapi aplikasi tetap berjalan tanpanya. Di luar cakupan UTS: integrasi Firebase, pembayaran online, dan notifikasi WhatsApp. Ketiganya masuk rencana fase implementasi menuju UAS."
+    },
+    {
+      "id": "scene08",
+      "key": "closing",
+      "label": "Penutup",
+      "text": "Dari pencatatan manual, menuju satu sistem yang terpusat. ChronoStore. Repository dan detail lengkap tersedia di GitHub."
+    }
+  ]
+}

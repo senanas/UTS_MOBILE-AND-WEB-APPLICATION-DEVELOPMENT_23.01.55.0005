@@ -1,0 +1,7 @@
+{"type": "SentenceBoundary", "offset": 1000000, "duration": 48138297, "text": "Ruang lingkup ChronoStore disusun dengan metode MoSCoW."}
+{"type": "SentenceBoundary", "offset": 48638297, "duration": 122364362, "text": "Prioritas Must atau wajib: autentikasi, kelola data jam tangan dengan validasi nomor seri unik, riwayat servis, dan katalog untuk pelanggan."}
+{"type": "SentenceBoundary", "offset": 171002660, "duration": 44523936, "text": "Ini fitur inti yang membuat aplikasi berfungsi."}
+{"type": "SentenceBoundary", "offset": 215526596, "duration": 83268617, "text": "Prioritas Should atau sebaiknya: dashboard ringkasan, pengingat garansi, dan transaksi."}
+{"type": "SentenceBoundary", "offset": 298795213, "duration": 56093085, "text": "Nilainya tinggi, tetapi aplikasi tetap berjalan tanpanya."}
+{"type": "SentenceBoundary", "offset": 354888298, "duration": 85638298, "text": "Di luar cakupan UTS: integrasi Firebase, pembayaran online, dan notifikasi WhatsApp."}
+{"type": "SentenceBoundary", "offset": 440526596, "duration": 52526595, "text": "Ketiganya masuk rencana fase implementasi menuju UAS."}
