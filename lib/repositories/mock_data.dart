@@ -1,0 +1,178 @@
+import '../models/user_account.dart';
+import '../models/watch.dart';
+import '../models/service_record.dart';
+import '../models/transaction.dart';
+
+/// Data simulasi statis untuk ChronoStore (fase lokal).
+/// Digantikan oleh Firestore nantinya.
+class MockData {
+  static List<UserAccount> users = [
+    UserAccount(
+      id: 'u_admin_1',
+      name: 'Admin ChronoStore',
+      email: 'admin@chronostore.id',
+      password: 'admin123',
+      role: UserRole.admin,
+    ),
+    UserAccount(
+      id: 'u_cust_1',
+      name: 'Pelanggan Satu',
+      email: 'pelanggan@chronostore.id',
+      password: 'pelanggan123',
+      role: UserRole.customer,
+    ),
+  ];
+
+  static List<Watch> watches = [
+    Watch(
+      id: 'w_1',
+      name: 'Seiko 5 Sports',
+      brand: 'Seiko',
+      model: 'SRPD65',
+      movementType: WatchType.automatic,
+      price: 3500000,
+      stock: 5,
+      serialNumber: 'SK-SRPD65-001',
+      imageUrl: null,
+      warrantyStart: DateTime(2026, 8, 15),
+      warrantyEnd: DateTime(2028, 8, 15),
+      createdAt: DateTime(2026, 8, 15),
+    ),
+    Watch(
+      id: 'w_2',
+      name: 'Casio G-Shock',
+      brand: 'Casio',
+      model: 'GA-2100',
+      movementType: WatchType.quartz,
+      price: 1800000,
+      stock: 8,
+      serialNumber: 'CS-GA2100-002',
+      imageUrl: null,
+      warrantyStart: DateTime(2026, 6, 1),
+      warrantyEnd: DateTime(2028, 6, 1),
+      createdAt: DateTime(2026, 6, 1),
+    ),
+    Watch(
+      id: 'w_3',
+      name: 'Citizen Eco-Drive',
+      brand: 'Citizen',
+      model: 'AW0040-82A',
+      movementType: WatchType.solar,
+      price: 4200000,
+      stock: 0,
+      serialNumber: 'CZ-AW0040-003',
+      imageUrl: null,
+      warrantyStart: DateTime(2025, 10, 1),
+      warrantyEnd: DateTime(2026, 10, 28),
+      createdAt: DateTime(2025, 10, 1),
+    ),
+    Watch(
+      id: 'w_4',
+      name: 'Timex Expedition',
+      brand: 'Timex',
+      model: 'TW4B19500',
+      movementType: WatchType.quartz,
+      price: 750000,
+      stock: 12,
+      serialNumber: 'TX-TW4B195-004',
+      imageUrl: null,
+      warrantyStart: DateTime(2026, 1, 10),
+      warrantyEnd: DateTime(2027, 1, 10),
+      createdAt: DateTime(2026, 1, 10),
+    ),
+    Watch(
+      id: 'w_5',
+      name: 'Orient Bambino',
+      brand: 'Orient',
+      model: 'AC0000AB',
+      movementType: WatchType.automatic,
+      price: 2800000,
+      stock: 3,
+      serialNumber: 'OR-AC0000-005',
+      imageUrl: null,
+      warrantyStart: DateTime(2026, 3, 20),
+      warrantyEnd: DateTime(2027, 3, 20),
+      createdAt: DateTime(2026, 3, 20),
+    ),
+    Watch(
+      id: 'w_6',
+      name: 'Casio Edifice',
+      brand: 'Casio',
+      model: 'EFR-S108D',
+      movementType: WatchType.quartz,
+      price: 2200000,
+      stock: 6,
+      serialNumber: 'CS-EFRS108-006',
+      imageUrl: null,
+      warrantyStart: DateTime(2025, 11, 5),
+      warrantyEnd: DateTime(2026, 11, 5),
+      createdAt: DateTime(2025, 11, 5),
+    ),
+  ];
+
+  static List<ServiceRecord> services = [
+    ServiceRecord(
+      id: 's_1',
+      watchId: 'w_1',
+      serviceDate: DateTime(2026, 9, 1),
+      serviceType: ServiceType.routine,
+      description: 'Penggantian baterai dan pembersihan mesin.',
+      cost: 150000,
+      nextServiceDate: DateTime(2027, 9, 1),
+    ),
+    ServiceRecord(
+      id: 's_2',
+      watchId: 'w_1',
+      serviceDate: DateTime(2026, 3, 15),
+      serviceType: ServiceType.minor,
+      description: 'Servis berkala, pelumasan mesin otomatik.',
+      cost: 250000,
+      nextServiceDate: DateTime(2026, 9, 15),
+    ),
+    ServiceRecord(
+      id: 's_3',
+      watchId: 'w_3',
+      serviceDate: DateTime(2025, 12, 10),
+      serviceType: ServiceType.major,
+      description: 'Perbaikan penukar tenaga surya.',
+      cost: 800000,
+      nextServiceDate: DateTime(2026, 12, 10),
+    ),
+    ServiceRecord(
+      id: 's_4',
+      watchId: 'w_5',
+      serviceDate: DateTime(2026, 7, 20),
+      serviceType: ServiceType.routine,
+      description: 'Pemeriksaan kalender dan tangan penunjuk.',
+      cost: 100000,
+      nextServiceDate: DateTime(2027, 1, 20),
+    ),
+  ];
+
+  static List<Transaction> transactions = [
+    Transaction(
+      id: 't_1',
+      watchId: 'w_4',
+      watchName: 'Timex Expedition',
+      quantity: 1,
+      unitPrice: 750000,
+      totalPrice: 750000,
+      transactionDate: DateTime(2026, 10, 15),
+      customerName: 'Pelanggan Satu',
+      userId: 'u_cust_1',
+      status: TransactionStatus.completed,
+    ),
+    Transaction(
+      id: 't_2',
+      watchId: 'w_2',
+      watchName: 'Casio G-Shock',
+      quantity: 2,
+      unitPrice: 1800000,
+      totalPrice: 3600000,
+      transactionDate: DateTime(2026, 10, 20),
+      customerName: 'Pembeli Walk-in',
+      userId: 'u_cust_1',
+      status: TransactionStatus.pending,
+    ),
+  ];
+}
