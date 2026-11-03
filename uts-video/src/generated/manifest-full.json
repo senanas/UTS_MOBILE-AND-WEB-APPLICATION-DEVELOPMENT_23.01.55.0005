@@ -1,0 +1,198 @@
+{
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "voice": "id-ID-GadisNeural",
+  "rate": "+0%",
+  "totalSeconds": 458.137,
+  "totalFrames": 13745,
+  "scenes": [
+    {
+      "id": "full01",
+      "key": "opening",
+      "label": "Bagian 1 — Pembuka",
+      "narration": "Halo. Saya Maheswari Shafa Helga, NIM dua tiga nol satu lima lima nol nol nol lima, kelas A satu. Aplikasi yang saya buat adalah ChronoStore, Sistem Informasi Manajemen Toko Jam Tangan. Proyek individu mata kuliah Mobile and Web Application Development. Repository tersedia di GitHub.",
+      "audio": "audio/full01.mp3",
+      "audioSeconds": 25.962,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 26.662,
+      "durationInFrames": 800
+    },
+    {
+      "id": "full02",
+      "key": "problem",
+      "label": "Bagian 2 — Masalah",
+      "narration": "Pemilik toko jam tangan menghadapi tiga masalah utama. Pertama, pencatatan stok dan nomor seri yang masih manual dan rentan duplikasi. Kedua, informasi tipe mesin dan spesifikasi yang tidak terorganisir. Ketiga, riwayat servis dan pengingat garansi yang tidak terkelola. Ketiganya berakar pada satu hal yang sama, yaitu pencatatan yang masih manual dan tersebar di banyak tempat.",
+      "audio": "audio/full02.mp3",
+      "audioSeconds": 30.775,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 31.475,
+      "durationInFrames": 944
+    },
+    {
+      "id": "full03",
+      "key": "persona",
+      "label": "Target Pengguna",
+      "narration": "Pengguna utama ChronoStore adalah admin atau pemilik toko, seperti Andi, tiga puluh empat tahun, yang setiap hari mengelola puluhan jam tangan dengan nomor seri dan masa garansi yang berbeda-beda. Ia membutuhkan pencarian cepat dan pengingat otomatis. Pengguna sekunder adalah pelanggan, seperti Siti, yang ingin melihat katalog, membandingkan spesifikasi, dan memesan tanpa harus datang ke toko.",
+      "audio": "audio/full03.mp3",
+      "audioSeconds": 30.075,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 30.775,
+      "durationInFrames": 923
+    },
+    {
+      "id": "full04",
+      "key": "stories",
+      "label": "Bagian 3 — User Stories",
+      "narration": "ChronoStore memiliki lima user story utama. Admin ingin mengelola data jam tangan lengkap dengan validasi nomor seri unik. Admin ingin mencatat riwayat servis per unit. Admin ingin menerima pengingat garansi jatuh tempo. Pelanggan ingin melihat katalog dengan filter tipe mesin. Semua pengguna harus login terlebih dahulu.",
+      "audio": "audio/full04.mp3",
+      "audioSeconds": 26.863,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 27.562,
+      "durationInFrames": 827
+    },
+    {
+      "id": "full05",
+      "key": "moscow",
+      "label": "Scope — MoSCoW",
+      "narration": "Prioritas Must meliputi autentikasi, CRUD jam tangan dengan validasi nomor seri unik, riwayat servis, dan katalog pelanggan. Should meliputi dashboard ringkasan, pengingat garansi, dan transaksi. Won't atau di luar UTS meliputi integrasi Firebase, pembayaran online, dan notifikasi WhatsApp untuk fase UAS.",
+      "audio": "audio/full05.mp3",
+      "audioSeconds": 26.387,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 27.087,
+      "durationInFrames": 813
+    },
+    {
+      "id": "full06",
+      "key": "flow",
+      "label": "Bagian 4 — User Flow & Sitemap",
+      "narration": "User flow dimulai dari login ke dashboard, lalu ke data jam tangan untuk melihat daftar, menambah, atau mengedit data, serta melihat detail dengan riwayat servis. Halaman pengingat untuk garansi dan servis jatuh tempo. Sitemap terdiri dari sebelas halaman dengan navigasi BottomNavigationBar untuk mobile dan NavigationRail untuk web.",
+      "audio": "audio/full06.mp3",
+      "audioSeconds": 25.6,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 26.3,
+      "durationInFrames": 789
+    },
+    {
+      "id": "full07",
+      "key": "wireframe",
+      "label": "Wireframe & Kesesuaian",
+      "narration": "Wireframe dibuat di Figma Minggu empat dengan tema gelap. Latar hitam, kartu abu gelap, dan aksen emas. Aplikasi Flutter sudah diselaraskan dengan wireframe. Palet, radius, dan tipografi diambil dari Figma dan dipakai di aplikasi maupun video ini.",
+      "audio": "audio/full07.mp3",
+      "audioSeconds": 22.65,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 23.35,
+      "durationInFrames": 700
+    },
+    {
+      "id": "full08",
+      "key": "demoLogin",
+      "label": "Bagian 5 — Demo: Login",
+      "narration": "Berikut tampilan aplikasi ChronoStore yang berjalan di Chrome. Halaman login menampilkan logo dengan wordmark emas dan dua field untuk email dan password. Jika email kosong dan tombol Masuk ditekan, muncul pesan Email wajib diisi. Jika format email salah, muncul Format email tidak valid. Setelah login dengan admin chronostore dan kata sandi admin satu dua tiga, navigasi berpindah ke dashboard.",
+      "audio": "audio/full08.mp3",
+      "audioSeconds": 31.55,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 32.25,
+      "durationInFrames": 968
+    },
+    {
+      "id": "full09",
+      "key": "demoDashboard",
+      "label": "Demo: Dashboard",
+      "narration": "Dashboard admin menampilkan empat kartu ringkasan. Total enam jam tangan, stok tiga puluh empat unit, garansi aktif, dan stok habis satu unit. Terdapat pengingat servis terdekat dan tombol quick action. Navigation rail aktif di sisi kiri untuk tampilan web.",
+      "audio": "audio/full09.mp3",
+      "audioSeconds": 21.688,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 22.387,
+      "durationInFrames": 672
+    },
+    {
+      "id": "full10",
+      "key": "demoList",
+      "label": "Demo: Data Jam Tangan",
+      "narration": "Halaman data jam tangan menampilkan enam jam: Seiko Sports, Casio G-Shock, Citizen Eco-Drive, Timex Expedition, Orient Bambino, dan Casio Edifice. Pencarian berdasarkan nama atau merek. Ketik Casio menampilkan dua hasil. Filter tipe mesin Automatic, Quartz, dan Solar juga tersedia. Jika pencarian tidak menemukan hasil, keadaan kosong ditampilkan.",
+      "audio": "audio/full10.mp3",
+      "audioSeconds": 32.087,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 32.787,
+      "durationInFrames": 984
+    },
+    {
+      "id": "full11",
+      "key": "demoForm",
+      "label": "Demo: Form & Validasi",
+      "narration": "Form tambah jam tangan memiliki delapan field dengan empat jenis input. TextField untuk nama, merek, model, harga, stok, dan nomor seri. SegmentedButton untuk tipe mesin. DatePicker untuk masa garansi. Validasi bekerja real-time. Nomor seri duplikat ditolak. Harga nol ditolak. Stok negatif ditolak. Setelah data valid, SnackBar konfirmasi muncul dan jam baru tampil di daftar.",
+      "audio": "audio/full11.mp3",
+      "audioSeconds": 36.938,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 37.637,
+      "durationInFrames": 1129
+    },
+    {
+      "id": "full12",
+      "key": "demoDetail",
+      "label": "Demo: Detail & Responsif",
+      "narration": "Halaman detail menampilkan informasi lengkap termasuk spesifikasi, harga, stok, nomor seri, masa garansi, dan riwayat servis per unit. Layout responsif menggunakan NavigationRail pada lebar layar enam ratus piksel ke atas.",
+      "audio": "audio/full12.mp3",
+      "audioSeconds": 18.512,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 19.212,
+      "durationInFrames": 576
+    },
+    {
+      "id": "full13",
+      "key": "stack",
+      "label": "Bagian 6 — Tech Stack",
+      "narration": "Tech stack ChronoStore. Flutter dan Dart untuk antarmuka yang berjalan di mobile maupun web. Provider sebagai pengelola state. Untuk backend, Firebase paket Spark yang gratis, yaitu Authentication, Cloud Firestore, dan Hosting.",
+      "audio": "audio/full13.mp3",
+      "audioSeconds": 19.825,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 20.525,
+      "durationInFrames": 616
+    },
+    {
+      "id": "full14",
+      "key": "firestore",
+      "label": "Rancangan Firestore",
+      "narration": "Firestore memiliki empat collection. Users menyimpan uid, nama, email, dan role. Watches menyimpan data jam lengkap dengan nomor seri unik dan masa garansi. Service records menyimpan riwayat servis per unit. Transactions menyimpan pesanan. Satu watch memiliki banyak service record dan banyak transaksi.",
+      "audio": "audio/full14.mp3",
+      "audioSeconds": 27.05,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 27.75,
+      "durationInFrames": 832
+    },
+    {
+      "id": "full15",
+      "key": "dataFlow",
+      "label": "Alur Data & Arsitektur",
+      "narration": "Alur berlapis. Layar memanggil Provider, Provider memanggil Repository, Repository berbicara ke Firestore. Saat ini memakai data simulasi. Hanya lapisan Repository yang diganti saat migrasi, layar dan Provider tidak perlu diubah.",
+      "audio": "audio/full15.mp3",
+      "audioSeconds": 21.325,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 22.025,
+      "durationInFrames": 661
+    },
+    {
+      "id": "full16",
+      "key": "roadmap",
+      "label": "Rencana Pertemuan 9-15",
+      "narration": "Pertemuan sembilan dan sepuluh, setup Firebase dan autentikasi. Sebelas dan dua belas, migrasi data ke Firestore. Tiga belas, security rules dan optimasi query. Empat belas, poles antarmuka. Lima belas, publikasi ke Firebase Hosting.",
+      "audio": "audio/full16.mp3",
+      "audioSeconds": 23.6,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 24.3,
+      "durationInFrames": 729
+    },
+    {
+      "id": "full17",
+      "key": "closing",
+      "label": "Kendala & Penutup",
+      "narration": "Kendala yang saya hadapi, Android SDK belum terpasang sehingga pengujian dilakukan di Chrome. Nilai Figma delapan puluh tiga, sudah diperbaiki dengan menambahkan keadaan kosong dan menyelaraskan tema. Pelajarannya, menetapkan validasi sejak awal mempercepat implementasi. ChronoStore. Terima kasih.",
+      "audio": "audio/full17.mp3",
+      "audioSeconds": 25.35,
+      "leadInSeconds": 0.3,
+      "durationInSeconds": 26.05,
+      "durationInFrames": 782
+    }
+  ]
+}

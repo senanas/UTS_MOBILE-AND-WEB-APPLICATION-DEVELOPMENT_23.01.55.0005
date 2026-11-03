@@ -26,3 +26,25 @@ Thumbs.db
 
 # Misc
 *.log
+
+# Video output & rendered files (MP4, PNG previews)
+*.mp4
+uts-video/out/
+
+# TTS generated audio & subtitle files
+uts-video/public/audio/*.mp3
+uts-video/public/audio/*.vtt
+
+# Debug/probe scripts (temporary dev tools)
+uts-video/scripts/debug-*.mjs
+uts-video/scripts/probe-*.mjs
+uts-video/scripts/record-demo.mjs
+uts-video/scripts/build-demo-meta.mjs
+
+# Remotion node_modules & cache
+uts-video/node_modules/
+uts-video/.cache/
+
+# Generated manifests (keep manifest-full.json for reproducibility)
+uts-video/src/generated/manifest.json
+uts-video/src/generated/manifest-plan.json
