@@ -25,7 +25,7 @@ ChronoStore adalah sistem informasi yang membantu pemilik/admin toko jam tangan 
 
 - **Desain Figma (Wireframe Minggu 4):** https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4?node-id=0-1&t=Wm5CuiVQ7ukApOV4-1
 - **Repository GitHub:** https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005
-- **Proposal UTS:** [docs/PROPOSAL_UTS_CHRONOSTORE.md](docs/PROPOSAL_UTS_CHRONOSTORE.md)
+- **Tautan Youtube:** https://youtu.be/if99dzhRM3I?si=OG6yxaJx22rsuwbY
 
 ## Cara Menjalankan
 
