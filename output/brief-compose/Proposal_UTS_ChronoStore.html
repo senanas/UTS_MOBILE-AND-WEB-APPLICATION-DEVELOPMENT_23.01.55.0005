@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Proposal UTS — ChronoStore</title>
+<style>
+  @page { margin: 2.5cm; }
+  body { margin: 0; padding: 0; }
+  h1 { font-family: 'SimHei', sans-serif; font-size: 20pt; color: #151515; text-align: center; margin: 0 0 4pt 0; }
+  h2 { font-family: 'SimHei', sans-serif; font-size: 14pt; color: #151515; border-bottom: 2pt solid #C9A227; padding-bottom: 3pt; margin: 18pt 0 8pt 0; }
+  h3 { font-family: 'SimHei', sans-serif; font-size: 12pt; color: #333333; margin: 12pt 0 6pt 0; }
+  p { font-family: 'SimSun', serif; font-size: 12pt; color: #222222; line-height: 1.6; margin: 4pt 0; text-align: justify; }
+  li { font-family: 'SimSun', serif; font-size: 12pt; color: #222222; line-height: 1.6; margin: 3pt 0; }
+  td { font-family: 'SimSun', serif; font-size: 11pt; color: #222222; padding: 5pt 8pt; border: 0.5pt solid #CCCCCC; line-height: 1.5; }
+  th { font-family: 'SimHei', sans-serif; font-size: 11pt; color: #FFFFFF; background-color: #C9A227; padding: 5pt 8pt; border: 0.5pt solid #C9A227; text-align: left; }
+  .subtitle { font-family: 'SimSun', serif; font-size: 11pt; color: #666666; text-align: center; margin: 2pt 0 12pt 0; }
+  .code { font-family: 'Consolas', monospace; font-size: 10pt; background-color: #F5F5F5; padding: 2pt 4pt; }
+  .callout { background-color: #FFF8E1; border-left: 3pt solid #C9A227; padding: 8pt 12pt; margin: 8pt 0; }
+  .callout p { margin: 2pt 0; font-size: 11pt; }
+  table { border-collapse: collapse; width: 100%; margin: 6pt 0 10pt 0; }
+</style>
+</head>
+<body>
+
+<h1>Proposal UTS — ChronoStore</h1>
+<p class="subtitle">Sistem Informasi Manajemen Toko Jam Tangan</p>
+<p class="subtitle">Maheswari Shafa Helga — NIM 23.01.55.0005 — Kelas A1</p>
+<p class="subtitle">Mobile and Web Application Development — Semester Ganjil 2026/2027</p>
+
+<div class="callout">
+<p><b>Repository GitHub:</b> https://github.com/senanas/UTS_MOBILE-AND-WEB-APPLICATION-DEVELOPMENT_23.01.55.0005</p>
+<p><b>Wireframe Figma:</b> https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4</p>
+</div>
+
+<h2>1. Problem Statement</h2>
+<p>Pemilik toko jam tangan menghadapi tiga masalah utama dalam pengelolaan operasional sehari-hari:</p>
+<table>
+<tr><th style="width:8%">No</th><th style="width:30%">Masalah</th><th style="width:62%">Dampak</th></tr>
+<tr><td>1</td><td>Pencatatan stok dan nomor seri yang masih manual</td><td>Rentan duplikasi nomor seri, kesalahan hitung stok, dan kesulitan melacak unit spesifik. Pencarian membutuhkan waktu lama karena data tersebar di buku catatan atau spreadsheet tidak terstruktur.</td></tr>
+<tr><td>2</td><td>Informasi tipe mesin dan spesifikasi tidak terorganisir</td><td>Tipe mesin (Automatic, Quartz, Solar) dan spesifikasi teknis tidak tercatat secara konsisten, sehingga pemilik tidak dapat memfilter atau membandingkan produk dengan cepat.</td></tr>
+<tr><td>3</td><td>Riwayat servis dan pengingat garansi tidak terkelola</td><td>Pelanggan jam tangan premium mengharapkan layanan purna jual, namun riwayat servis tercatat di tempat terpisah dan tidak ada pengingat otomatis untuk garansi atau servis jatuh tempo.</td></tr>
+</table>
+<p>Ketiga masalah berakar pada satu hal yang sama: <b>pencatatan yang masih manual dan tersebar di banyak tempat</b>. ChronoStore menggabungkan ketiga fungsi — manajemen stok, katalog terorganisir, dan riwayat servis — dalam satu sistem terpusat.</p>
+
+<h2>2. Persona</h2>
+
+<h3>2.1 Pengguna Utama — Admin / Pemilik Toko</h3>
+<table>
+<tr><th style="width:25%">Atribut</th><th style="width:75%">Deskripsi</th></tr>
+<tr><td><b>Nama</b></td><td>Andi Pratama</td></tr>
+<tr><td><b>Usia</b></td><td>34 tahun</td></tr>
+<tr><td><b>Pekerjaan</b></td><td>Pemilik toko jam tangan premium</td></tr>
+<tr><td><b>Kebutuhan</b></td><td>Mengelola puluhan jam tangan dengan nomor seri unik dan masa garansi yang berbeda-beda setiap hari. Membutuhkan pencarian cepat berdasarkan nama, merek, atau tipe mesin, serta pengingat otomatis untuk garansi dan servis jatuh tempo.</td></tr>
+<tr><td><b>Tujuan</b></td><td>Mengurangi kesalahan pencatatan, mempercepat pencarian produk, dan memastikan tidak ada garansi atau servis yang terlewat.</td></tr>
+<tr><td><b>Frustrasi</b></td><td>Sering menerima keluhan pelanggan karena nomor seri tercatat ganda atau garansi sudah berakhir tanpa pemberitahuan sebelumnya.</td></tr>
+</table>
+
+<h3>2.2 Pengguna Sekunder — Pelanggan</h3>
+<table>
+<tr><th style="width:25%">Atribut</th><th style="width:75%">Deskripsi</th></tr>
+<tr><td><b>Nama</b></td><td>Siti Rahma</td></tr>
+<tr><td><b>Usia</b></td><td>29 tahun</td></tr>
+<tr><td><b>Kebutuhan</b></td><td>Melihat katalog jam tangan, membandingkan spesifikasi (tipe mesin, harga, stok), dan memesan tanpa harus datang ke toko.</td></tr>
+<tr><td><b>Tujuan</b></td><td>Mendapatkan informasi produk yang lengkap dan transparan sebelum membeli.</td></tr>
+</table>
+
+<h2>3. User Stories</h2>
+<p>Berdasarkan analisis masalah dan persona, berikut enam user story utama ChronoStore:</p>
+<table>
+<tr><th style="width:8%">ID</th><th style="width:10%">Peran</th><th style="width:52%">User Story</th><th style="width:30%">Kriteria Penerimaan</th></tr>
+<tr><td>US-01</td><td>Admin</td><td>Sebagai admin, saya ingin menambah, mengedit, dan menghapus data jam tangan sehingga katalog selalu terbarui.</td><td>CRUD berfungsi penuh; data baru tampil di daftar; konfirmasi SnackBar muncul.</td></tr>
+<tr><td>US-02</td><td>Admin</td><td>Sebagai admin, saya ingin nomor seri divalidasi secara unik sehingga tidak ada dua jam tangan dengan nomor seri yang sama.</td><td>Form menolak nomor seri duplikat dengan pesan "Nomor seri sudah digunakan"; saat edit, nomor seri milik jam itu sendiri di-skip.</td></tr>
+<tr><td>US-03</td><td>Admin</td><td>Sebagai admin, saya ingin mencatat riwayat servis per unit jam tangan sehingga layanan purna jual terdokumentasi.</td><td>Form catat servis menyimpan tanggal, jenis, deskripsi, dan biaya; riwayat tampil di halaman detail.</td></tr>
+<tr><td>US-04</td><td>Admin</td><td>Sebagai admin, saya ingin menerima pengingat garansi dan servis yang mendekati jatuh tempo.</td><td>Halaman pengingat menampilkan garansi/servis jatuh tempo dalam 7 hari, diurutkan dari terdekat.</td></tr>
+<tr><td>US-05</td><td>Pelanggan</td><td>Sebagai pelanggan, saya ingin melihat katalog jam tangan dengan filter berdasarkan tipe mesin.</td><td>Katalog menampilkan semua jam; filter Automatic/Quartz/Solar berfungsi; pencarian nama/merek berfungsi; empty state tampil jika tidak ada hasil.</td></tr>
+<tr><td>US-06</td><td>Umum</td><td>Sebagai pengguna, saya harus login terlebih dahulu sebelum mengakses fitur aplikasi.</td><td>Email dan password divalidasi; login gagal menampilkan pesan error; login sukses navigasi ke dashboard/katalog sesuai role.</td></tr>
+</table>
+
+<h2>4. Kebutuhan Fungsional &amp; Prioritas (MoSCoW)</h2>
+<table>
+<tr><th style="width:12%">Prioritas</th><th style="width:35%">Fitur</th><th style="width:53%">Keterangan</th></tr>
+<tr><td rowspan="4"><b>Must</b></td><td>Autentikasi (Login &amp; Register)</td><td>Validasi email/password; role-based routing (admin vs pelanggan)</td></tr>
+<tr><td>CRUD Jam Tangan</td><td>8 field: nama, merek, model, tipe mesin, harga, stok, nomor seri, masa garansi</td></tr>
+<tr><td>Validasi Nomor Seri Unik</td><td>7 validator: email, password, nama, required, nonNegativeInt, price, serialNumber</td></tr>
+<tr><td>Riwayat Servis &amp; Katalog Pelanggan</td><td>Catat servis per unit; katalog dengan filter tipe mesin dan pencarian</td></tr>
+<tr><td rowspan="3"><b>Should</b></td><td>Dashboard Ringkasan</td><td>4 kartu: total jam, total stok, garansi aktif, stok habis</td></tr>
+<tr><td>Pengingat Garansi &amp; Servis</td><td>Jatuh tempo dalam 7 hari, diurutkan dari terdekat</td></tr>
+<tr><td>Transaksi / Pesanan</td><td>Pelanggan memesan; admin lihat semua transaksi</td></tr>
+<tr><td rowspan="3"><b>Won't</b></td><td>Integrasi Firebase (Auth + Firestore)</td><td>Direncanakan untuk fase UAS (Pertemuan 9-15)</td></tr>
+<tr><td>Pembayaran Online</td><td>Payment gateway — fase pasca-UAS</td></tr>
+<tr><td>Notifikasi WhatsApp</td><td>Pengingat otomatis via WhatsApp — fase pasca-UAS</td></tr>
+</table>
+
+<h2>5. User Flow</h2>
+<p>Alur pengguna dimulai dari login dan bercabang sesuai peran:</p>
+<p>&nbsp;&nbsp;<b>Login</b> &rarr; <b>Dashboard (Admin)</b> / <b>Katalog (Pelanggan)</b></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Admin:</b> Dashboard &rarr; Data Jam Tangan &rarr; <b>Tambah/Edit (Form)</b> &rarr; Detail &rarr; Riwayat Servis</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Admin:</b> Dashboard &rarr; Pengingat Garansi &amp; Servis</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<b>Pelanggan:</b> Katalog &rarr; Detail (read-only) &rarr; Pesan &rarr; Transaksi</p>
+<p>&nbsp;&nbsp;<b>Logout</b> &rarr; kembali ke Login</p>
+<p>Setiap transisi menggunakan <b>Navigator.push</b> dan <b>Navigator.pop</b>. Navigasi utama (Dashboard, Data Jam, Pengingat) menggunakan <b>BottomNavigationBar</b> pada layar mobile (lebar &lt; 600px) dan <b>NavigationRail</b> pada layar web/tablet (lebar &ge; 600px).</p>
+
+<h2>6. Sitemap</h2>
+<p>Aplikasi terdiri dari <b>11 halaman</b> dengan navigasi responsif:</p>
+<table>
+<tr><th style="width:8%">Kode</th><th style="width:25%">Halaman</th><th style="width:15%">Peran</th><th style="width:52%">Deskripsi</th></tr>
+<tr><td>H1</td><td>Login</td><td>Umum</td><td>Form email + password dengan validasi real-time</td></tr>
+<tr><td>H2</td><td>Register</td><td>Umum</td><td>Form daftar akun: nama, email, password, pilih role</td></tr>
+<tr><td>H3</td><td>Dashboard</td><td>Admin</td><td>4 kartu ringkasan + pengingat servis + quick action</td></tr>
+<tr><td>H4</td><td>Data Jam Tangan</td><td>Admin</td><td>Daftar/card + pencarian + filter tipe mesin + empty state</td></tr>
+<tr><td>H5</td><td>Form Jam Tangan</td><td>Admin</td><td>Tambah/edit: 8 field, 4 jenis input, validasi semua field</td></tr>
+<tr><td>H6</td><td>Detail Jam Tangan</td><td>Admin &amp; Pelanggan</td><td>Info lengkap + garansi + riwayat servis + tombol aksi</td></tr>
+<tr><td>H7</td><td>Riwayat Servis</td><td>Admin</td><td>Daftar servis per unit + form catat servis</td></tr>
+<tr><td>H8</td><td>Pengingat</td><td>Admin</td><td>Garansi &amp; servis jatuh tempo, diurutkan terdekat</td></tr>
+<tr><td>H9</td><td>Katalog Pelanggan</td><td>Pelanggan</td><td>Grid card jam tangan, read-only, filter &amp; pencarian</td></tr>
+<tr><td>H10</td><td>Transaksi</td><td>Admin &amp; Pelanggan</td><td>Daftar + form catat transaksi; admin lihat semua</td></tr>
+<tr><td>H11</td><td>Main Shell</td><td>Admin &amp; Pelanggan</td><td>Wrapper navigasi: BottomNav (mobile) / NavigationRail (web)</td></tr>
+</table>
+
+<h2>7. Wireframe &amp; Tautan Figma</h2>
+<p>Wireframe dibuat di Figma pada Minggu 4 dengan tema gelap. Palet warna disampel langsung dari wireframe dan diterapkan konsisten di aplikasi Flutter maupun video presentasi.</p>
+
+<div class="callout">
+<p><b>Tautan Figma:</b> https://www.figma.com/design/dR2XS04F45XfPhO9x2LBrD/23.01.55.0005---SI-Manajemen-Jam-Tangan-Wireframe-Minggu-4</p>
+</div>
+
+<h3>Style Guide (disampel dari Figma)</h3>
+<table>
+<tr><th style="width:30%">Elemen</th><th style="width:25%">Warna</th><th style="width:45%">Kode Hex</th></tr>
+<tr><td>Latar layar</td><td>Hitam lembut</td><td>#151515</td></tr>
+<tr><td>Permukaan kartu</td><td>Abu gelap</td><td>#1B1B1B</td></tr>
+<tr><td>Kartu terangkat</td><td>Abu lebih terang</td><td>#1F1F1F</td></tr>
+<tr><td>Aksen emas</td><td>Emas</td><td>#C9A227</td></tr>
+<tr><td>Teks utama</td><td>Putih</td><td>#FFFFFF</td></tr>
+<tr><td>Teks sekunder</td><td>Abu terang</td><td>#A0A0A0</td></tr>
+<tr><td>Status berhasil</td><td>Hijau</td><td>#4CAF50</td></tr>
+<tr><td>Status menunggu</td><td>Jingga</td><td>#ED8B00</td></tr>
+<tr><td>Status galat</td><td>Merah</td><td>#EF5350</td></tr>
+</table>
+
+<h3>Tipografi &amp; Ukuran</h3>
+<table>
+<tr><th style="width:50%">Elemen</th><th style="width:50%">Ukuran</th></tr>
+<tr><td>Judul</td><td>24px</td></tr>
+<tr><td>Subjudul</td><td>18px</td></tr>
+<tr><td>Isi</td><td>16px</td></tr>
+<tr><td>Caption</td><td>14px</td></tr>
+<tr><td>Tinggi tombol</td><td>48px</td></tr>
+<tr><td>Spacing</td><td>Kelipatan 8px (4, 8, 16, 24, 32)</td></tr>
+</table>
+<p><b>Responsif:</b> Lebar layar &ge; 600px menggunakan NavigationRail; di bawahnya menggunakan BottomNavigationBar.</p>
+
+<h2>8. Tech Stack</h2>
+<table>
+<tr><th style="width:30%">Komponen</th><th style="width:70%">Teknologi</th></tr>
+<tr><td>Framework</td><td>Flutter 3.47.7 (channel stable) — berjalan di mobile &amp; web</td></tr>
+<tr><td>Bahasa</td><td>Dart 3.13.5</td></tr>
+<tr><td>State Management</td><td>Provider (ChangeNotifier)</td></tr>
+<tr><td>Desain UI</td><td>Figma (wireframe Minggu 4) + Material 3</td></tr>
+<tr><td>Version Control</td><td>Git + GitHub</td></tr>
+<tr><td>Backend (rencana UAS)</td><td>Firebase Spark (gratis) — Authentication, Cloud Firestore, Hosting</td></tr>
+<tr><td>Arsitektur</td><td>Repository Pattern — isolasi sumber data untuk migrasi mock &rarr; Firestore tanpa mengubah UI</td></tr>
+</table>
+
+<h3>Alur Data Berlapis</h3>
+<p>&nbsp;&nbsp;<b>Layar</b> &rarr; memanggil <b>Provider</b> &rarr; memanggil <b>Repository</b> &rarr; berbicara ke <b>Firestore</b> (saat ini: mock data in-memory)</p>
+<p>Saat migrasi ke Firestore, hanya lapisan Repository yang diganti. Layar dan Provider tidak perlu diubah.</p>
+
+<h2>9. Rancangan Database Firestore</h2>
+<p>Empat collection utama dengan relasi one-to-many:</p>
+
+<table>
+<tr><th style="width:20%">Collection</th><th style="width:40%">Field</th><th style="width:40%">Keterangan</th></tr>
+<tr><td rowspan="4"><b>users</b></td><td>uid (string, PK)</td><td>ID dari Firebase Auth</td></tr>
+<tr><td>name (string)</td><td>Nama lengkap pengguna</td></tr>
+<tr><td>email (string)</td><td>Email unik, dari Firebase Auth</td></tr>
+<tr><td>role (string)</td><td>"admin" atau "customer"</td></tr>
+<tr><td rowspan="10"><b>watches</b></td><td>id (string, PK)</td><td>ID auto-generated Firestore</td></tr>
+<tr><td>name (string)</td><td>Nama jam tangan, wajib</td></tr>
+<tr><td>brand (string)</td><td>Merek, wajib</td></tr>
+<tr><td>model (string)</td><td>Kode model</td></tr>
+<tr><td>movementType (string)</td><td>"automatic" | "quartz" | "solar"</td></tr>
+<tr><td>price (number)</td><td>Harga dalam Rupiah, harus &gt; 0</td></tr>
+<tr><td>stock (number)</td><td>Jumlah stok, &ge; 0</td></tr>
+<tr><td>serialNumber (string)</td><td>Unik — divalidasi di aplikasi</td></tr>
+<tr><td>warrantyStart (timestamp)</td><td>Tanggal mulai garansi</td></tr>
+<tr><td>warrantyEnd (timestamp)</td><td>Tanggal berakhir garansi</td></tr>
+<tr><td rowspan="6"><b>service_records</b></td><td>id (string, PK)</td><td>ID auto-generated</td></tr>
+<tr><td>watchId (string, FK)</td><td>Relasi ke watches.id — one-to-many</td></tr>
+<tr><td>serviceDate (timestamp)</td><td>Tanggal servis dilakukan</td></tr>
+<tr><td>serviceType (string)</td><td>"routine" | "minor" | "major"</td></tr>
+<tr><td>description (string)</td><td>Deskripsi pekerjaan</td></tr>
+<tr><td>cost (number)</td><td>Biaya servis dalam Rupiah</td></tr>
+<tr><td rowspan="7"><b>transactions</b></td><td>id (string, PK)</td><td>ID auto-generated</td></tr>
+<tr><td>watchId (string, FK)</td><td>Relasi ke watches.id</td></tr>
+<tr><td>watchName (string)</td><td>Snapshot nama jam (denormalisasi)</td></tr>
+<tr><td>quantity (number)</td><td>Jumlah unit dipesan</td></tr>
+<tr><td>totalPrice (number)</td><td>quantity &times; unitPrice</td></tr>
+<tr><td>userId (string, FK)</td><td>Relasi ke users.uid</td></tr>
+<tr><td>status (string)</td><td>"pending" | "completed" | "cancelled"</td></tr>
+</table>
+
+<h3>Relasi Antar Collection</h3>
+<p>&nbsp;&nbsp;<b>users</b> (1) &rarr; (banyak) <b>transactions</b></p>
+<p>&nbsp;&nbsp;<b>watches</b> (1) &rarr; (banyak) <b>service_records</b></p>
+<p>&nbsp;&nbsp;<b>watches</b> (1) &rarr; (banyak) <b>transactions</b></p>
+
+<div class="callout">
+<p><b>Catatan:</b> Saat ini (fase UTS) data disimpan secara in-memory menggunakan mock data (List di Dart) yang dikelola oleh Provider. Rancangan Firestore di atas akan diimplementasi pada Pertemuan 9-15 menuju UAS. Karena sudah menggunakan Repository Pattern, hanya file di <span class="code">repositories/</span> yang perlu diubah — layar, provider, dan model tetap sama.</p>
+</div>
+
+<h2>10. Data Simulasi (Mock Data Saat Ini)</h2>
+<p>Aplikasi saat ini berjalan dengan 6 jam tangan, 4 catatan servis, dan 2 transaksi simulasi:</p>
+<table>
+<tr><th style="width:5%">No</th><th style="width:22%">Nama</th><th style="width:15%">Merek</th><th style="width:15%">Tipe Mesin</th><th style="width:13%">Harga</th><th style="width:10%">Stok</th><th style="width:20%">Nomor Seri</th></tr>
+<tr><td>1</td><td>Seiko 5 Sports</td><td>Seiko</td><td>Automatic</td><td>Rp 3.500.000</td><td>5</td><td>SK-SRPD65-001</td></tr>
+<tr><td>2</td><td>Casio G-Shock</td><td>Casio</td><td>Quartz</td><td>Rp 1.800.000</td><td>8</td><td>CS-GA2100-002</td></tr>
+<tr><td>3</td><td>Citizen Eco-Drive</td><td>Citizen</td><td>Solar</td><td>Rp 4.200.000</td><td>0</td><td>CZ-AW0040-003</td></tr>
+<tr><td>4</td><td>Timex Expedition</td><td>Timex</td><td>Quartz</td><td>Rp 750.000</td><td>12</td><td>TX-TW4B195-004</td></tr>
+<tr><td>5</td><td>Orient Bambino</td><td>Orient</td><td>Automatic</td><td>Rp 2.800.000</td><td>3</td><td>OR-AC0000-005</td></tr>
+<tr><td>6</td><td>Casio Edifice</td><td>Casio</td><td>Quartz</td><td>Rp 2.200.000</td><td>6</td><td>CS-EFRS108-006</td></tr>
+</table>
+
+<h2>11. Validasi Form (7 Validator)</h2>
+<p>Form tambah/edit jam tangan memiliki 8 field dengan 4 jenis input (TextField, SegmentedButton, DatePicker, SnackBar) dan 7 validator:</p>
+<table>
+<tr><th style="width:25%">Validator</th><th style="width:40%">Aturan</th><th style="width:35%">Pesan Error</th></tr>
+<tr><td>validateEmail</td><td>Wajib, format mengandung @ dan .</td><td>"Email wajib diisi" / "Format email tidak valid"</td></tr>
+<tr><td>validatePassword</td><td>Wajib, minimal 6 karakter</td><td>"Kata sandi wajib diisi" / "Kata sandi minimal 6 karakter"</td></tr>
+<tr><td>validateName</td><td>Wajib, minimal 2 karakter</td><td>"Nama wajib diisi" / "Nama minimal 2 karakter"</td></tr>
+<tr><td>validateRequired</td><td>Field wajib diisi</td><td>"{fieldName} wajib diisi"</td></tr>
+<tr><td>validateNonNegativeInt</td><td>Wajib, angka, &ge; 0</td><td>"{fieldName} wajib diisi" / "harus berupa angka" / "tidak boleh negatif"</td></tr>
+<tr><td>validatePrice</td><td>Wajib, angka, &gt; 0</td><td>"Harga wajib diisi" / "Harga harus lebih dari 0"</td></tr>
+<tr><td>validateSerialNumber</td><td>Wajib, unik (cek seluruh daftar)</td><td>"Nomor seri wajib diisi" / "Nomor seri sudah digunakan"</td></tr>
+</table>
+
+<h2>12. Rencana Implementasi (Pertemuan 9-15)</h2>
+<table>
+<tr><th style="width:20%">Pertemuan</th><th style="width:80%">Rencana</th></tr>
+<tr><td>Pertemuan 9-10</td><td>Setup Firebase project, Firebase Auth (login/register dengan Firestore)</td></tr>
+<tr><td>Pertemuan 11-12</td><td>Migrasi data mock ke Cloud Firestore (4 collection)</td></tr>
+<tr><td>Pertemuan 13</td><td>Security rules Firestore, optimasi query, indexing</td></tr>
+<tr><td>Pertemuan 14</td><td>Polish antarmuka, error handling, testing tambahan</td></tr>
+<tr><td>Pertemuan 15</td><td>Publikasi ke Firebase Hosting, finalisasi</td></tr>
+</table>
+
+<h2>13. Akun Demo</h2>
+<table>
+<tr><th style="width:20%">Peran</th><th style="width:40%">Email</th><th style="width:40%">Password</th></tr>
+<tr><td>Admin</td><td>admin@chronostore.id</td><td>admin123</td></tr>
+<tr><td>Pelanggan</td><td>pelanggan@chronostore.id</td><td>pelanggan123</td></tr>
+</table>
+
+</body>
+</html>
