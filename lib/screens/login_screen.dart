@@ -5,7 +5,6 @@ import '../app/constants.dart';
 import '../providers/auth_provider.dart';
 import '../services/validation_service.dart';
 import 'register_screen.dart';
-import '../screens/main_shell.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -27,27 +26,23 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
 
     final auth = context.read<AuthProvider>();
-    final success = auth.login(
+    final success = await auth.login(
       _emailController.text.trim(),
       _passwordController.text,
     );
 
+    // Tidak perlu Navigator: AuthGate otomatis pindah ke MainShell
+    // begitu Firebase mengirim status "sudah login".
     if (!success && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(auth.error ?? 'Login gagal'),
           backgroundColor: AppColors.error,
         ),
-      );
-    } else if (success && mounted) {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => const MainShell()),
-        (route) => false,
       );
     }
   }
@@ -76,7 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 80,
                         decoration: BoxDecoration(
                           color: AppColors.primaryLight,
-                          borderRadius: BorderRadius.circular(AppSizes.radiusXl),
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.radiusXl),
                         ),
                         child: const Icon(
                           Icons.watch,
@@ -130,10 +126,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         prefixIcon: const Icon(Icons.lock_outline),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
                           onPressed: () {
-                            setState(() => _obscurePassword = !_obscurePassword);
+                            setState(
+                                () => _obscurePassword = !_obscurePassword);
                           },
                         ),
                       ),
@@ -171,7 +170,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => const RegisterScreen()),
+                              MaterialPageRoute(
+                                  builder: (_) => const RegisterScreen()),
                             );
                           },
                           child: const Text(
@@ -185,35 +185,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    // Info akun demo
                     const SizedBox(height: AppSizes.spacingLg),
-                    Container(
-                      padding: const EdgeInsets.all(AppSizes.spacingMd),
-                      decoration: BoxDecoration(
-                        color: AppColors.background,
-                        borderRadius: BorderRadius.circular(AppSizes.radiusMd),
-                        border: Border.all(color: AppColors.border),
-                      ),
-                      child: const Column(
-                        children: [
-                          Text(
-                            'Akun demo:',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'Admin: admin@chronostore.id / admin123\nPelanggan: pelanggan@chronostore.id / pelanggan123',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: AppColors.textSecondary,
-                            ),
-                          ),
-                        ],
+                    const Text(
+                      'Gunakan email & password simulasi, jangan password asli Anda.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                   ],

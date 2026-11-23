@@ -4,7 +4,20 @@
 **Sumber:** `modul-minggu-09-firebase-login.docx` + `materi-ajar-minggu-09-firebase-login.pptx`  
 **Target wajib:** Chrome, paket Spark, penyedia Email/Password saja, **belum** memakai Firestore.
 
-Panduan ini dibuat berdasarkan kondisi asli folder `jam_tangan`, jadi ikuti urutannya dari atas. Setiap langkah menyebut **file mana yang dibuka** dan **kode apa yang ditempel**.
+Panduan ini dibuat berdasarkan kondisi asli folder `jam_tangan`, jadi tiap langkah menyebut **file mana yang dibuka** dan **kode apa yang ditempel**.
+
+> **Status 9 November 2026 — SUDAH DITERAPKAN.** Semua perubahan kode di bawah sudah ditulis ke project:
+> `flutter analyze` → *No issues found*, `flutter test` → 4/4 lulus, `flutter build web` → berhasil.
+> Tabel audit di bab 0 sengaja dipertahankan sebagai **kondisi SEBELUM** perubahan.
+> **Perbaikan 19:18:** "daftar sebagai Admin tapi tampil Pelanggan" sudah diatasi — peran kini disimpan per `uid` di `SharedPreferences` dan dimuat lewat `AuthRepository.loadRoles()` di `main()`. Lihat **Soal role** di Langkah 4. Akun yang dibuat sebelum perbaikan harus didaftar ulang.
+> Yang masih perlu kamu kerjakan sendiri: **Langkah 1** (cek Firebase Console) dan **Langkah 10** (uji manual di Chrome, screenshot, tabel uji, lalu commit & push).
+>
+> **Catatan 16 November 2026 — Minggu 10 sudah diterapkan.** Dokumen ini adalah
+> catatan historis Minggu 9. `auth_repository.dart` sekarang membaca peran dari
+> dokumen `users/{uid}` di Cloud Firestore (SharedPreferences hanya cadangan),
+> dan data jam/transaksi sudah pindah ke Firestore. Lihat
+> [`PANDUAN_MINGGU_10_FIRESTORE.md`](PANDUAN_MINGGU_10_FIRESTORE.md) untuk kode
+> dan langkah terbaru. Potongan kode di bawah **jangan ditempel ulang**.
 
 ---
 
@@ -102,6 +115,8 @@ git commit -m "Hubungkan project ke Firebase"
 git push
 ```
 
+
+
 > Catatan: `web/index.html` **tidak perlu** ditambahi script Firebase JS SDK. Versi `firebase_core_web 4.1.0` yang terpasang menyuntikkan SDK-nya sendiri secara otomatis.  
 > Minggu ini jangan jalankan di Android/desktop: `firebase_options.dart` baru berisi konfigurasi **web**. Android butuh `google-services.json` (di luar batas pertemuan ini).
 
@@ -150,6 +165,7 @@ File lama memakai `MockData.users` dan menyimpan password plaintext di memori. G
 
 ```dart
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user_account.dart';
 
@@ -157,6 +173,26 @@ import '../models/user_account.dart';
 /// Tidak ada lagi daftar user dan password yang disimpan di aplikasi.
 class AuthRepository {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  /// Firebase Auth TIDAK punya kolom role. Untuk sementara (Minggu 9), peran
+  /// yang dipilih saat mendaftar disimpan di penyimpanan lokal dengan kunci
+  /// berdasarkan uid. Minggu 10 data ini pindah ke Firestore.
+  static const _roleKeyPrefix = 'chronostore_role_';
+  static final Map<String, UserRole> _roleCache = {};
+
+  /// Muat peran tersimpan sebelum widget pertama dibangun (dipanggil di main).
+  static Future<void> loadRoles() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (final key in prefs.getKeys()) {
+      if (!key.startsWith(_roleKeyPrefix)) continue;
+      final uid = key.substring(_roleKeyPrefix.length);
+      final value = prefs.getString(key);
+      _roleCache[uid] = UserRole.values.firstWhere(
+        (r) => r.name == value,
+        orElse: () => UserRole.customer,
+      );
+    }
+  }
 
   /// Firebase User -> UserAccount (dipakai UI lama ChronoStore).
   UserAccount? _toAccount(User? user) {
@@ -166,8 +202,7 @@ class AuthRepository {
       name: user.displayName ?? (user.email?.split('@').first ?? 'Pengguna'),
       email: user.email ?? '',
       password: '', // password tidak pernah disimpan di aplikasi
-      // Firebase Auth tidak menyimpan role. Minggu 10 role pindah ke Firestore.
-      role: UserRole.customer,
+      role: _roleCache[user.uid] ?? UserRole.customer,
     );
   }
 
@@ -195,31 +230,31 @@ class AuthRepository {
     required String password,
     required UserRole role,
   }) async {
-    // `role` tetap diterima supaya RegisterScreen tidak perlu diubah besar-besaran.
-    // Untuk sekarang belum disimpan ke Firebase; lihat catatan "Soal role" di bawah.
     final credential = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
-    await credential.user?.updateDisplayName(name);
-    return _toAccount(credential.user)!.copyWith(name: name);
+    final user = credential.user!;
+
+    // Simpan peran SEGERA (sinkron) agar aliran authStateChanges yang aktif
+    // saat pendaftaran langsung membawa peran yang benar, lalu simpan permanen.
+    _roleCache[user.uid] = role;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('$_roleKeyPrefix${user.uid}', role.name);
+    await user.updateDisplayName(name);
+
+    return _toAccount(user)!.copyWith(name: name);
   }
 
   Future<void> logout() => _auth.signOut();
 }
 ```
 
-**Soal role (baca ini, penting):** aplikasi kamu punya tampilan Admin vs Pelanggan, tapi Firebase Auth cuma menyimpan email/UID/nama — **tidak ada kolom role**. Jadi dengan kode di atas semua akun dianggap Pelanggan. Ini **bukan error**, dan sesuai batas Minggu 9 (role baru disimpan di Firestore Minggu 10).
+**Soal role (baca ini, penting):** aplikasi kamu punya tampilan Admin vs Pelanggan, tapi Firebase Auth cuma menyimpan `uid`, `email`, `displayName`, dan token — **tidak ada kolom role**. Kalau peran di-hardcode `UserRole.customer`, maka "daftar sebagai Admin" tetap tampil Pelanggan (persis seperti screenshot: `admin (Pelanggan)`). Nama "admin" yang muncul itu hanya `displayName`, bukan peran.
 
-Kalau kamu ingin tetap bisa menguji tampilan Admin sekarang, ganti satu baris `role:` di `_toAccount` menjadi:
+Solusi sementara yang dipakai di sini: peran yang dipilih di `SegmentedButton` disimpan di `SharedPreferences` dengan kunci `chronostore_role_<uid>`, lalu dimuat ulang oleh `AuthRepository.loadRoles()` di `main()` sebelum `runApp`. Jadi peran **benar saat daftar dan tetap benar setelah refresh**. Ini masih jembatan: Minggu 10 peran disimpan di Firestore supaya bisa dibaca lintas perangkat dan tidak bisa diubah sembarangan dari sisi klien.
 
-```dart
-      role: (user.email ?? '').toLowerCase().startsWith('admin')
-          ? UserRole.admin
-          : UserRole.customer,
-```
-
-Lalu daftar dengan email simulasi yang diawali `admin`, misalnya `admin@chronostore.test`. Ini cuma jembatan sementara.
+> ⚠️ Akun yang dibuat **sebelum** perbaikan ini tidak punya data peran tersimpan, jadi tetap terbaca Pelanggan. Daftar akun simulasi baru (atau hapus user lama di Firebase Console → Authentication → Users, lalu daftar ulang) untuk melihat tampilan Admin.
 
 ---
 
@@ -323,6 +358,77 @@ class AuthProvider extends ChangeNotifier {
 ```
 
 
+### Langkah 6 — Buat `lib/screens/auth_gate.dart`, lalu ubah `lib/main.dart`
+
+Ini versi ChronoStore dari `cek_status_login.dart` di modul (bab 5, slide 17).
+
+**File baru `lib/screens/auth_gate.dart`:**
+
+```dart
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import 'login_screen.dart';
+import 'main_shell.dart';
+
+/// Halaman mengikuti status login Firebase (cek status login, Minggu 9).
+/// Belum login -> LoginScreen, sudah login -> MainShell.
+/// Sesi bertahan setelah refresh karena status dibaca dari Firebase.
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+        if (snapshot.hasError) {
+          return const Scaffold(
+            body: Center(child: Text('Gagal memeriksa status login')),
+          );
+        }
+        if (snapshot.hasData) return const MainShell();
+        return const LoginScreen();
+      },
+    );
+  }
+}
+```
+
+**Di `lib/main.dart`** tambahkan import, satu `await`, lalu ganti `home`:
+
+```dart
+import 'repositories/auth_repository.dart';
+import 'screens/auth_gate.dart';   // sebelumnya: import 'screens/login_screen.dart';
+```
+
+```dart
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Firebase Auth tidak menyimpan role; muat peran yang dipilih saat mendaftar
+  // sebelum widget apa pun dibangun (penting agar benar setelah refresh).
+  await AuthRepository.loadRoles();
+
+  runApp(const ChronoStoreApp());
+}
+```
+
+```dart
+        home: const AuthGate(),     // sebelumnya: home: const LoginScreen(),
+```
+
+---
+
 ### Langkah 7 — Ubah `login_screen.dart` dan `register_screen.dart`
 
 #### `lib/screens/login_screen.dart`
@@ -398,7 +504,7 @@ Alasannya: `admin@chronostore.id / admin123` itu akun `MockData`, **tidak ada di
   }
 ```
 
-1. Biarkan `SegmentedButton` "Daftar sebagai" tetap ada (biar UI tidak berubah), tapi ingat: pilihan role **belum tersimpan** minggu ini — lihat catatan di Langkah 4.
+1. Biarkan `SegmentedButton` "Daftar sebagai" tetap ada — pilihannya **sekarang benar-benar disimpan** (secara lokal per `uid`) oleh `AuthRepository.register()`. Lihat **Soal role** di Langkah 4.
 
 > `onPressed: auth.isLoading ? null : _submit` tidak perlu diubah; method `async` tetap bisa dipakai di sini. Tombol otomatis nonaktif selama menunggu jawaban Firebase (`_isLoading`), sesuai modul.
 
@@ -509,6 +615,8 @@ git push
 | Widget test gagal                              | Test memanggil Firebase                              | Pakai unit test murni (Langkah 9)                                |
 | Akun demo lama tidak bisa login                | Itu akun `MockData`, bukan Firebase                  | Hapus kotak "Akun demo", daftar akun simulasi baru               |
 | Error saat dijalankan di Android               | `firebase_options.dart` hanya berisi konfigurasi web | Minggu ini target **Chrome** saja                                |
+| Daftar sebagai Admin tapi tampilan tetap Pelanggan | Firebase Auth tidak punya kolom `role`; peran belum disimpan | Simpan peran per `uid` (lihat **Soal role**, Langkah 4); akun lama harus didaftar ulang |
+| `flutter test`: `Invalid WebSocket upgrade request` | Variabel proxy mengganggu koneksi `flutter_tester` | `HTTP_PROXY= HTTPS_PROXY= http_proxy= https_proxy= flutter test --no-pub` |
 
 ---
 

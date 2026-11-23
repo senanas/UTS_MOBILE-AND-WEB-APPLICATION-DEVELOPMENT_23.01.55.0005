@@ -26,6 +26,7 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
   WatchType _selectedType = WatchType.quartz;
   DateTime? _warrantyStart;
   DateTime? _warrantyEnd;
+  bool _isSaving = false;
   bool get _isEdit => widget.watch != null;
 
   @override
@@ -56,10 +57,14 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
     super.dispose();
   }
 
-  void _submit() {
+  /// Minggu 10: menulis dokumen ke koleksi `watches` (bukan lagi List memori).
+  Future<void> _submit() async {
+    if (_isSaving) return;
     if (!_formKey.currentState!.validate()) return;
 
     final watchProv = context.read<WatchProvider>();
+    final messenger = ScaffoldMessenger.of(context);
+    setState(() => _isSaving = true);
 
     final watch = Watch(
       id: widget.watch?.id ?? '',
@@ -76,20 +81,32 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
       createdAt: widget.watch?.createdAt ?? DateTime.now(),
     );
 
-    if (_isEdit) {
-      watchProv.update(watch.copyWith(id: widget.watch!.id));
-    } else {
-      watchProv.add(watch);
-    }
-
-    if (mounted) {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
+    try {
+      if (_isEdit) {
+        await watchProv.update(watch.copyWith(id: widget.watch!.id));
+      } else {
+        await watchProv.add(watch);
+      }
+      messenger.showSnackBar(
         SnackBar(
-          content: Text(_isEdit ? 'Jam tangan diperbarui' : 'Jam tangan ditambahkan'),
+          content: Text(
+            _isEdit
+                ? 'Jam tangan diperbarui di Firestore'
+                : 'Jam tangan ditambahkan ke Firestore',
+          ),
           backgroundColor: AppColors.success,
         ),
       );
+      if (mounted) Navigator.pop(context);
+    } catch (_) {
+      messenger.showSnackBar(
+        const SnackBar(
+          content: Text('Gagal menyimpan. Periksa Rules & koneksi Firestore.'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+    } finally {
+      if (mounted) setState(() => _isSaving = false);
     }
   }
 
@@ -116,7 +133,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
     final watchProv = context.read<WatchProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: Text(_isEdit ? 'Edit Jam Tangan' : 'Tambah Jam Tangan')),
+      appBar: AppBar(
+          title: Text(_isEdit ? 'Edit Jam Tangan' : 'Tambah Jam Tangan')),
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -133,7 +151,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                     prefixIcon: Icon(Icons.watch),
                   ),
                   validator: (v) {
-                    final result = ValidationService.validateRequired(v, 'Nama');
+                    final result =
+                        ValidationService.validateRequired(v, 'Nama');
                     return result.isValid ? null : result.error;
                   },
                 ),
@@ -146,7 +165,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                     prefixIcon: Icon(Icons.branding_watermark),
                   ),
                   validator: (v) {
-                    final result = ValidationService.validateRequired(v, 'Merek');
+                    final result =
+                        ValidationService.validateRequired(v, 'Merek');
                     return result.isValid ? null : result.error;
                   },
                 ),
@@ -159,7 +179,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                     prefixIcon: Icon(Icons.tag),
                   ),
                   validator: (v) {
-                    final result = ValidationService.validateRequired(v, 'Model');
+                    final result =
+                        ValidationService.validateRequired(v, 'Model');
                     return result.isValid ? null : result.error;
                   },
                 ),
@@ -210,7 +231,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                     prefixIcon: Icon(Icons.inventory_2_outlined),
                   ),
                   validator: (v) {
-                    final result = ValidationService.validateNonNegativeInt(v, 'Stok');
+                    final result =
+                        ValidationService.validateNonNegativeInt(v, 'Stok');
                     return result.isValid ? null : result.error;
                   },
                 ),
@@ -223,7 +245,8 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                     prefixIcon: Icon(Icons.numbers),
                   ),
                   validator: (v) {
-                    final result = ValidationService.validateRequired(v, 'Nomor seri');
+                    final result =
+                        ValidationService.validateRequired(v, 'Nomor seri');
                     if (!result.isValid) return result.error;
                     final isTaken = watchProv.isSerialNumberTaken(
                       v!.trim(),
@@ -276,8 +299,14 @@ class _WatchFormScreenState extends State<WatchFormScreen> {
                 ),
                 const SizedBox(height: AppSizes.spacingXl),
                 ElevatedButton(
-                  onPressed: _submit,
-                  child: const Text(AppConstants.btnSave),
+                  onPressed: _isSaving ? null : _submit,
+                  child: _isSaving
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Text(AppConstants.btnSave),
                 ),
               ],
             ),

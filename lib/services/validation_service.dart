@@ -5,7 +5,8 @@ class ValidationResult {
   const ValidationResult(this.isValid, [this.error]);
 
   static const valid = ValidationResult(true, null);
-  static ValidationResult invalid(String message) => ValidationResult(false, message);
+  static ValidationResult invalid(String message) =>
+      ValidationResult(false, message);
 }
 
 /// Service validasi untuk form-form ChronoStore.
@@ -14,8 +15,8 @@ class ValidationService {
   static ValidationResult validateEmail(String? value) {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return ValidationResult.invalid('Email wajib diisi');
-    if (!v.contains('@') || !v.contains('.')) {
-      return ValidationResult.invalid('Format email tidak valid');
+    if (!RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(v)) {
+      return ValidationResult.invalid('Format email belum benar');
     }
     return ValidationResult.valid;
   }
@@ -48,12 +49,17 @@ class ValidationService {
   }
 
   /// Validasi angka wajib & non-negatif.
-  static ValidationResult validateNonNegativeInt(String? value, String fieldName) {
+  static ValidationResult validateNonNegativeInt(
+      String? value, String fieldName) {
     final v = value?.trim() ?? '';
     if (v.isEmpty) return ValidationResult.invalid('$fieldName wajib diisi');
     final n = int.tryParse(v);
-    if (n == null) return ValidationResult.invalid('$fieldName harus berupa angka');
-    if (n < 0) return ValidationResult.invalid('$fieldName tidak boleh negatif');
+    if (n == null) {
+      return ValidationResult.invalid('$fieldName harus berupa angka');
+    }
+    if (n < 0) {
+      return ValidationResult.invalid('$fieldName tidak boleh negatif');
+    }
     return ValidationResult.valid;
   }
 

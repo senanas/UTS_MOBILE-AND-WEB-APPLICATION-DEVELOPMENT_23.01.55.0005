@@ -45,10 +45,10 @@ flutter run -d chrome
 
 ### Akun Demo
 
-| Role | Email | Password |
-|------|-------|----------|
-| Admin | admin@chronostore.id | admin123 |
-| Pelanggan | pelanggan@chronostore.id | pelanggan123 |
+Mulai Minggu 9 login memakai **Firebase Authentication**, sehingga akun demo lokal
+(`admin@chronostore.id` / `pelanggan@chronostore.id`) sudah tidak berlaku. Buat akun
+simulasi baru lewat halaman **Daftar**, lalu cek di Firebase Console
+(Authentication → Users). Gunakan email dan password simulasi, jangan password asli Anda.
 
 ## Fitur Utama (MVP)
 
@@ -62,7 +62,7 @@ flutter run -d chrome
 | 6 | Pengingat garansi & servis (jatuh tempo <= 7 hari) | Should | ✅ |
 | 7 | Katalog jam tangan untuk pelanggan dengan filter & pencarian | Must | ✅ |
 | 8 | Transaksi/pesanan pelanggan | Should | ✅ |
-| 9 | Integrasi Firebase (Auth + Firestore) | Won't (UAS) | Rencana |
+| 9 | Integrasi Firebase (Auth + Firestore) | Won't (UAS) | ✅ Minggu 9 (Auth), Minggu 10 (Firestore) |
 | 10 | Pembayaran online | Won't | — |
 | 11 | Notifikasi WhatsApp | Won't | — |
 
@@ -76,17 +76,37 @@ flutter run -d chrome
 | Target platform | Web (Chrome) — mobile responsive |
 | Desain UI | Figma |
 | Version control | Git + GitHub |
-| Backend (rencana UAS) | Firebase Spark — Firestore, Authentication, Hosting |
+| Backend | Firebase Spark — Authentication (Minggu 9), Cloud Firestore (Minggu 10) |
 
-## Rancangan Database Firestore (Rencana UAS)
+## Struktur Database Firestore (Minggu 10)
 
-4 collection utama:
-- **users** — uid, name, email, role (admin/customer)
-- **watches** — name, brand, model, movementType, price, stock, serialNumber (unique), warrantyStart, warrantyEnd
-- **service_records** — watchId, serviceDate, serviceType, description, cost, nextServiceDate
-- **transactions** — watchId, watchName, quantity, unitPrice, totalPrice, customerName, userId, status
+Tiga collection aktif sesuai pemetaan ERD modul Minggu 10 (RoomBook → ChronoStore):
 
-Detail lengkap: [docs/PROPOSAL_UTS_CHRONOSTORE.md](docs/PROPOSAL_UTS_CHRONOSTORE.md)
+| Collection | Doc ID | Field utama |
+|---|---|---|
+| `users` | `uid` Firebase Auth | `id_pengguna`, `nama_lengkap`, `email`, `nomor_telepon`, `peran`, `dibuat_pada` |
+| `watches` | kode jam (`w_1` …) | `id_jam`, `nama_jam`, `merek`, `model`, `jenis_mesin`, `harga`, `stok`, `nomor_seri`, `garansi_mulai`, `garansi_akhir`, `dibuat_pada` |
+| `transactions` | auto-ID | `id_transaksi`, `id_pengguna`, `id_jam`, `nama_jam`, `nama_pelanggan`, `jumlah`, `harga_satuan`, `total_harga`, `tanggal`, `status`, `dibuat_pada` |
+
+`nama_jam` sengaja **di-denormalisasi** ke `transactions` karena Firestore tidak
+mendukung JOIN — daftar transaksi cukup satu kali baca. `service_records` masih di
+memori lokal dan menyusul di Minggu 11.
+
+Security Rules (sudah dipakai, **jangan** biarkan Test Mode terbuka):
+
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+```
+
+Detail lengkap: [docs/PANDUAN_MINGGU_10_FIRESTORE.md](docs/PANDUAN_MINGGU_10_FIRESTORE.md)
+· Rancangan awal: [docs/PROPOSAL_UTS_CHRONOSTORE.md](docs/PROPOSAL_UTS_CHRONOSTORE.md)
 
 ## Struktur Project
 
@@ -210,3 +230,64 @@ Detail proses dan nilai mentahnya ada di [`docs/DESIGN_GUIDE_FIGMA.md`](docs/DES
 | 5 | Setup Flutter + GitHub | docs/WORKSHEET_MINGGU_5_SHAFA.md |
 | 6 | Widget, layout, navigasi | docs/WORKSHEET_MINGGU_6_SHAFA.md |
 | 7 | Form, validasi, state | docs/WORKSHEET_MINGGU_7_SHAFA.md |
+| 9 | Firebase Authentication (login, daftar, cek status) | docs/PANDUAN_MINGGU_9_FIREBASE_LOGIN.md |
+| 10 | Cloud Firestore: 3 collection, tambah & tampil data | docs/PANDUAN_MINGGU_10_FIRESTORE.md |
+
+## Praktikum Minggu 10 — Cloud Firestore
+
+**Video praktikum:** https://youtu.be/ibqVFb5ytyY
+
+Data aplikasi kini tersimpan permanen di Cloud Firestore (paket Spark, target Chrome).
+Login memakai Firebase Authentication (Minggu 9); profil `users/{uid}` menyimpan
+`nama_lengkap` dan `peran`, koleksi `watches` terisi otomatis sekali lewat
+WriteBatch, dan `transactions` ditulis dari Form Pesanan dengan penolakan pesanan
+ganda + pengecekan stok. Halaman Beranda dan Transaksi memakai `StreamBuilder`
+`.snapshots()` sehingga data real-time dan **tetap ada setelah F5**.
+
+Layer data dipisah di `lib/services/layanan_firestore.dart` dengan kontrak
+`LayananChronoStore`; widget test menyuntik `LayananMemori()` sehingga tidak
+membutuhkan koneksi Firebase. Daftar lengkap perubahan ada di
+[docs/PANDUAN_MINGGU_10_FIRESTORE.md](docs/PANDUAN_MINGGU_10_FIRESTORE.md).
+
+### Tabel Uji Cloud Firestore
+
+| # | Kasus uji | Langkah | Hasil yang diharapkan | Hasil nyata |
+|---|-----------|---------|-----------------------|-------------|
+| 1 | Tambah data valid | Login akun simulasi → buka jam → **Pesan** → **Buat Pesanan** | Dokumen tampil di `transactions` & Transaksi Saya; stok berkurang | _(isi setelah uji)_ |
+| 2 | Tolak pesanan ganda | Ulangi pesanan jam + akun + tanggal yang sama | SnackBar "sudah Anda pesan hari ini"; dokumen tidak bertambah | _(isi setelah uji)_ |
+| 3 | Bertahan saat refresh | Tekan **F5** di Chrome | Sapaan nama, daftar jam, & transaksi tetap tampil | _(isi setelah uji)_ |
+| 4 | Isolasi antar akun | Keluar, lalu masuk akun simulasi kedua | Transaksi akun pertama tidak muncul di akun kedua | _(isi setelah uji)_ |
+| 5 | Security Rules | Ubah Rules jadi `if false;` → Publish → refresh | Firestore mengembalikan `permission-denied` | _(isi setelah uji)_ |
+
+> Setelah kasus 5, kembalikan Rules ke `request.auth != null` dan **Publish** lagi.
+
+### Bukti Console
+
+| Bukti | File |
+|-------|------|
+| Collection `users` + dokumen `peran` | `docs/screenshot-firestore-users.png` |
+| Collection `watches` (6 dokumen auto-seed) | `docs/screenshot-firestore-watches.png` |
+| Collection `transactions` + `nama_jam` | `docs/screenshot-firestore-transactions.png` |
+
+### Refleksi
+
+- **Denormalisasi:** `nama_jam` disalin ke `transactions` karena Firestore tidak punya
+  JOIN; daftar transaksi cukup satu kali baca. Konsekuensinya, perubahan nama produk
+  tidak otomatis memperbarui transaksi lama.
+- **Kendala:** `permission-denied` diatasi dengan mempublish Rules
+  `request.auth != null`; konflik nama kelas `Transaction` diatasi dengan
+  `import 'package:cloud_firestore/cloud_firestore.dart' hide Transaction;`;
+  `flutter test` perlu variabel proxy dikosongkan agar `flutter_tester` terhubung.
+- **Minggu 11:** Edit/Hapus transaksi dengan dialog konfirmasi, pemetaan
+  `GET/POST/PUT/DELETE`, dan memindahkan `service_records` ke Firestore.
+
+### Perintah verifikasi
+
+```bash
+flutter analyze
+flutter test --no-pub       # kosongkan HTTP_PROXY/HTTPS_PROXY bila perlu
+flutter build web
+```
+
+Hasil pengerjaan: `flutter analyze` bersih, `flutter test` **12/12 lulus**,
+`flutter build web` berhasil.

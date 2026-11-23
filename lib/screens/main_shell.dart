@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
+import '../services/layanan_chronostore.dart';
 import 'login_screen.dart';
 import 'dashboard_screen.dart';
 import 'watch_list_screen.dart';
 import 'reminder_screen.dart';
+import 'riwayat_transaksi_screen.dart';
 
 /// Shell utama setelah login.
 /// Mengelola navigasi antar halaman dan menampilkan sesuai role.
@@ -17,6 +19,25 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int _currentIndex = 0;
+  bool _seeded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Auto-seed koleksi `watches` sekali saja saat halaman utama dibuka.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _isiJamAwal());
+  }
+
+  Future<void> _isiJamAwal() async {
+    if (_seeded || !mounted) return;
+    _seeded = true;
+    try {
+      await context.read<LayananChronoStore>().isiJamAwalJikaKosong();
+    } catch (_) {
+      // Firestore belum dibuat di Console / Rules belum dipublish.
+      // Jangan membuat aplikasi gagal dibuka; pesan ada di panduan Minggu 10.
+    }
+  }
 
   void _onNavTap(int index) {
     setState(() => _currentIndex = index);
@@ -37,6 +58,9 @@ class _MainShellState extends State<MainShell> {
         return WatchListScreen(navIndex: _currentIndex, onNavTap: _onNavTap);
       case 2:
         return ReminderScreen(navIndex: _currentIndex, onNavTap: _onNavTap);
+      case 3:
+        return RiwayatTransaksiScreen(
+            navIndex: _currentIndex, onNavTap: _onNavTap);
       default:
         return DashboardScreen(navIndex: _currentIndex, onNavTap: _onNavTap);
     }

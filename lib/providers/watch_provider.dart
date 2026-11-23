@@ -1,37 +1,75 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../models/watch.dart';
-import '../repositories/watch_repository.dart';
+import '../services/layanan_chronostore.dart';
+import '../services/layanan_firestore.dart';
 
-/// State management untuk jam tangan.
+/// State management jam tangan — Minggu 10: sumber data Cloud Firestore.
+///
+/// Provider berlangganan `streamDaftarJam()` lalu menyimpan hasilnya di cache.
+/// Getter lama (all / getById / search) tetap sinkron supaya halaman lama tidak
+/// perlu diubah, tetapi isinya kini real-time dan bertahan setelah refresh.
 class WatchProvider extends ChangeNotifier {
-  final WatchRepository _repo = WatchRepository();
+  final LayananChronoStore _layanan;
+  StreamSubscription<List<Watch>>? _subscription;
 
+  List<Watch> _watches = [];
+  bool _loaded = false;
+  String? _error;
   String _searchQuery = '';
   WatchType? _filterType;
 
+  WatchProvider({LayananChronoStore? layanan})
+      : _layanan = layanan ?? LayananFirestore() {
+    _subscription = _layanan.streamDaftarJam().listen(
+      (list) {
+        _watches = list;
+        _loaded = true;
+        _error = null;
+        notifyListeners();
+      },
+      onError: (Object error) {
+        _loaded = true;
+        _error = error.toString();
+        notifyListeners();
+      },
+    );
+  }
+
+  bool get isLoading => !_loaded;
+  String? get error => _error;
+
+  List<Watch> get all => List.unmodifiable(_watches);
+
   List<Watch> get watches {
-    var result = _repo.search(_searchQuery);
+    var result = _searchQuery.isEmpty
+        ? List<Watch>.from(_watches)
+        : _watches.where((w) {
+            final q = _searchQuery.toLowerCase();
+            return w.name.toLowerCase().contains(q) ||
+                w.brand.toLowerCase().contains(q) ||
+                w.model.toLowerCase().contains(q) ||
+                w.serialNumber.toLowerCase().contains(q);
+          }).toList();
     if (_filterType != null) {
       result = result.where((w) => w.movementType == _filterType).toList();
     }
     return result;
   }
 
-  List<Watch> get all => _repo.getAll();
-
   String get searchQuery => _searchQuery;
   WatchType? get filterType => _filterType;
 
-  int get totalWatches => _repo.totalWatches;
-  int get totalStock => _repo.totalStock;
-  int get outOfStockCount => _repo.outOfStock;
-
-  int get activeWarrantyCount {
-    return _repo.getAll().where((w) {
-      final s = w.warrantyStatus;
-      return s == WarrantyStatus.active || s == WarrantyStatus.expiringSoon;
-    }).length;
-  }
+  int get totalWatches => _watches.length;
+  int get totalStock => _watches.fold(0, (sum, w) => sum + w.stock);
+  int get outOfStockCount => _watches.where((w) => w.isOutOfStock).length;
+  int get activeWarrantyCount => _watches.where((w) {
+        final status = w.warrantyStatus;
+        return status == WarrantyStatus.active ||
+            status == WarrantyStatus.expiringSoon;
+      }).length;
 
   void setSearchQuery(String query) {
     _searchQuery = query;
@@ -49,30 +87,32 @@ class WatchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Watch? getById(String id) => _repo.getById(id);
+  Watch? getById(String id) {
+    for (final watch in _watches) {
+      if (watch.id == id) return watch;
+    }
+    return null;
+  }
 
   bool isSerialNumberTaken(String serialNumber, {String? excludeId}) {
-    return _repo.isSerialNumberTaken(serialNumber, excludeId: excludeId);
+    return _watches.any(
+      (w) =>
+          w.serialNumber.toLowerCase() == serialNumber.toLowerCase() &&
+          w.id != excludeId,
+    );
   }
 
-  void add(Watch watch) {
-    _repo.add(watch);
-    notifyListeners();
-  }
+  // Create / Update / Delete diteruskan ke Firestore. Stream mengirim data
+  // terbaru dan memicu notifyListeners() dengan sendirinya.
+  Future<Watch> add(Watch watch) => _layanan.tambahJam(watch);
+  Future<void> update(Watch watch) => _layanan.ubahJam(watch);
+  Future<void> delete(String id) => _layanan.hapusJam(id);
 
-  void update(Watch watch) {
-    _repo.update(watch);
-    notifyListeners();
-  }
+  void refresh() => notifyListeners();
 
-  bool delete(String id) {
-    final result = _repo.delete(id);
-    if (result) notifyListeners();
-    return result;
-  }
-
-  /// Refresh (jika perlu untuk reload dari sumber data).
-  void refresh() {
-    notifyListeners();
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 }

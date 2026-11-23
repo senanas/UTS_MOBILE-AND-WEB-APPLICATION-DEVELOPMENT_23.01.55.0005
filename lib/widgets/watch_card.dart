@@ -9,6 +9,7 @@ class WatchCard extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final VoidCallback? onBuy;
 
   const WatchCard({
     super.key,
@@ -16,6 +17,7 @@ class WatchCard extends StatelessWidget {
     this.onTap,
     this.onEdit,
     this.onDelete,
+    this.onBuy,
   });
 
   @override
@@ -94,6 +96,26 @@ class WatchCard extends StatelessWidget {
                 ),
               ),
               // Aksi
+              if (onBuy != null && !watch.isOutOfStock)
+                Padding(
+                  padding: const EdgeInsets.only(left: AppSizes.spacingSm),
+                  child: Material(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                    child: InkWell(
+                      onTap: onBuy,
+                      borderRadius: BorderRadius.circular(AppSizes.radiusMd),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.shopping_cart_outlined,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               if (onEdit != null || onDelete != null)
                 PopupMenuButton<String>(
                   icon: const Icon(Icons.more_vert, color: AppColors.textHint, size: 20),

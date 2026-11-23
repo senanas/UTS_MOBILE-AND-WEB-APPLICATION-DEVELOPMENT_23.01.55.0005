@@ -25,6 +25,7 @@ class AppScaffold extends StatelessWidget {
     NavItem(icon: Icons.dashboard_outlined, activeIcon: Icons.dashboard, label: 'Dashboard'),
     NavItem(icon: Icons.watch_outlined, activeIcon: Icons.watch, label: 'Data Jam'),
     NavItem(icon: Icons.notifications_outlined, activeIcon: Icons.notifications, label: 'Pengingat'),
+    NavItem(icon: Icons.receipt_long_outlined, activeIcon: Icons.receipt_long, label: 'Riwayat'),
   ];
 
   @override

@@ -172,7 +172,9 @@ class WatchDetailScreen extends StatelessWidget {
                   label: const Text(AppConstants.btnRecordService),
                 ),
               ),
-            if (!isAdmin && !watch.isOutOfStock)
+            if (isAdmin) const SizedBox(height: AppSizes.spacingSm),
+            // Tombol beli tersedia untuk semua pengguna (admin & pelanggan).
+            if (!watch.isOutOfStock)
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
@@ -188,7 +190,7 @@ class WatchDetailScreen extends StatelessWidget {
                   label: const Text(AppConstants.btnOrder),
                 ),
               ),
-            if (!isAdmin && watch.isOutOfStock)
+            if (watch.isOutOfStock)
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(

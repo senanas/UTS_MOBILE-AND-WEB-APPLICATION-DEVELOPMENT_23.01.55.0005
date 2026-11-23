@@ -8,6 +8,7 @@ class AppConstants {
   static const String navDashboard = 'Dashboard';
   static const String navWatchList = 'Data Jam';
   static const String navReminder = 'Pengingat';
+  static const String navRiwayat = 'Riwayat';
 
   // Label tombol
   static const String btnLogin = 'Masuk';
@@ -22,6 +23,13 @@ class AppConstants {
   // Label role
   static const String roleAdmin = 'Admin';
   static const String roleCustomer = 'Pelanggan';
+
+  // Bootstrap admin: email ini SELALU diperlakukan sebagai Admin, walaupun
+  // dokumen users/{uid} lama di Firestore masih berisi 'pelanggan'.
+  // Tambahkan email lain di sini bila dosen/penguji memakai akun admin lain.
+  static const Set<String> emailAdmin = {
+    'admin@chronostore.com',
+  };
 
   // Label empty state
   static const String emptyWatches = 'Belum ada data jam tangan';
